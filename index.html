@@ -52,31 +52,25 @@
 	}
 
 	img {
-			max-width: 100%; /* Make sure it fits inside the container */
+			max-width: 100%;
 			height: auto;
 			display: block;
 			margin: auto;
 	}
 	.my-video {
-			max-width: 100%; /* Make sure it fits inside the container */
+			max-width: 100%;
 			height: auto;
 			display: block;
 			margin: auto;
 	}
-	/* Hide both video displays initially, will display based on JS detection */
-  .vid-mobile, .vid-non-mobile { display: none; }
-
-  /* Show the video content by default on non-mobile devices */
-  .show-vid-mobile .vid-mobile { display: block; }
-  .show-vid-non-mobile .vid-non-mobile { display: block; }
 
 	a:link,a:visited
 	{
-		color: #0e7862; /*#1367a7;*/
+		color: #0e7862; 
 		text-decoration: none;
 	}
 	a:hover {
-		color: #24b597; /*#208799;*/
+		color: #24b597; 
 	}
 
 	h1 {
@@ -90,7 +84,7 @@
     font-size: 17px;
     flex-grow: 1;
 		width: 70%;
-    max-width: calc(100% - 290px); /* Adjust according to the width of .paper-code-tab */
+    max-width: calc(100% - 290px); 
 	}
 	table td, table td * {
 	    vertical-align: middle;
@@ -105,13 +99,13 @@
 	    height: 150px;
 	}
 
-	.layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+	.layered-paper {
 		box-shadow:
-		        0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
-		        5px 5px 0 0px #fff, /* The second layer */
-		        5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
-		        10px 10px 0 0px #fff, /* The third layer */
-		        10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+		        0px 0px 1px 1px rgba(0,0,0,0.35),
+		        5px 5px 0 0px #fff,
+		        5px 5px 1px 1px rgba(0,0,0,0.35),
+		        10px 10px 0 0px #fff,
+		        10px 10px 1px 1px rgba(0,0,0,0.35);
 		margin-top: 5px;
 		margin-left: 10px;
 		margin-right: 30px;
@@ -119,9 +113,9 @@
 	}
 
 	hr {
-    height: 1px; /* Sets the height of the line to 1 pixel */
-    border: none; /* Removes the default border */
-    background-color: #DDD; /* Sets the line color to black */
+    height: 1px; 
+    border: none; 
+    background-color: #DDD; 
   }
 
 	div.hypothesis {
@@ -176,15 +170,15 @@
 
 	.inline-div {
 			position: relative;
-	    display: inline-block; /* Makes both the div and paragraph inline-block elements */
-	    vertical-align: top; /* Aligns them at the top, you can adjust this to middle, bottom, etc., based on your needs */
-	    width: 50px; /* Optional: Adds space between the div and the paragraph */
+	    display: inline-block;
+	    vertical-align: top; 
+	    width: 50px;
 	}
 
 </style>
 
-	  <title>The Platonic Representation Hypothesis</title>
-      <meta property="og:title" content="The Platonic Representation Hypothesis" />
+	  <title>A Project on Teaching CLIP to Count</title>
+      <meta property="og:title" content="A Project on Teaching CLIP to Count" />
 			<meta charset="UTF-8">
   </head>
 
@@ -197,15 +191,15 @@
 						<table class="header" align=left>
 								<tr>
 									<td colspan=4>
-										<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace; /* Adds fallbacks */">A Grand Unified Theory of Deep Learning</span>
+										<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace;">Training CLIP to Count Objects</span>
 									</td>
 								</tr>
 								<tr>
-										<td align=left>
-												<span style="font-size:17px"><a href="your_website">Margulan Ismoldayev</a></span>
+									<td align=left>
+												<span style="font-size:17px"><a href="your_website">Your Name</a></span>
 										</td>
 										<td align=left>
-												<span style="font-size:17px"><a href="your_partner's_website">Mateja Vukelic</a></span>
+												<span style="font-size:17px"><a href="your_partner_website">Collaborator Name</a></span>
 										</td>
 								<tr>
 									<td colspan=4 align=left><span style="font-size:18px">Final project for 6.7960, MIT</span></td>
@@ -222,16 +216,17 @@
           <div style="position:fixed; max-width:inherit; top:max(20%,120px)">
               <b style="font-size:16px">Outline</b><br><br>
               <a href="#intro">Introduction</a><br><br>
-              <a href="#does_x_do_y">Does X do Y?</a><br><br>
-              <a href="#implications_and_limitations">Implications and limitations</a><br><br>
+              <a href="#method">Methodology</a><br><br>
+              <a href="#experiments">Experiments and Results</a><br><br>
+              <a href="#discussion">Discussion and Future Work</a><br><br>
+              <a href="#references">References</a><br><br>
           </div>
 				</div>
 		    <div class="main-content-block">
-            <!--You can embed an image like this:-->
             <img src="./images/your_image_here.png" width=512px/>
 		    </div>
 		    <div class="margin-right-block">
-						Caption for the image.
+						A representative image (placeholder) showcasing object counting scenario.
 		    </div>
 		</div>
 
@@ -240,89 +235,78 @@
 				</div>
 		    <div class="main-content-block">
 						<h1>Introduction</h1>
-            Motivate your project. What question are you asking. Why is it unanswered so far? What gap in the literature or practice are you filling?
-            Why is it important?
+            The ability to count objects in images is a fundamental skill that humans acquire effortlessly. In computer vision, counting objects remains a challenging problem, especially when the categories and scenes vary significantly. Traditional supervised methods often rely on large, annotated datasets and carefully tuned architectures to perform counting tasks. With the advent of large-scale vision-language models like CLIP, which aligns images and text in a shared embedding space, a new paradigm emerges: leveraging powerful pre-trained features to tackle tasks such as counting in a zero-shot or few-shot manner.
+
+            In this project, we build upon OpenAI's CLIP model to perform object counting. We aim to answer the question: can we train a simple regression head on top of CLIP’s joint image-text embeddings to accurately count objects of a given category, and how does this approach compare to CLIP’s inherent zero-shot capabilities?
+
+            **Key Contributions:**
+            - We use CLIP’s pre-trained visual and textual encoders to extract embeddings for images and corresponding object class descriptions.
+            - We train a neural network regressor to predict the count of the specified object from the combined image-text embedding.
+            - We compare this learned model against a zero-shot CLIP baseline, where we select the most similar text prompt among multiple possible counts.
+
+            **Motivation:**
+            While CLIP excels at recognizing concepts and can sometimes estimate the presence or absence of objects, counting requires more granular numeric reasoning. By training a custom head on top of CLIP embeddings, we investigate whether CLIP’s strong representation space can be extended to handle counting tasks robustly.
+
+            **Obvious Potential Improvements Missed:**
+            - **Data Augmentation:** We rely primarily on the original COCO dataset without extensive augmentation strategies (e.g., random crops, rotations, or synthetic variations) that could improve robustness and generalization.
+            - **More Advanced Architectures:** While we train a multi-layer perceptron (MLP) regressor, exploring more sophisticated architectures, such as transformer-based regressors or attention mechanisms over image patches, could yield higher accuracy.
+            - **Better Integration with CLIP:** Instead of a simple concatenation of embeddings, fine-tuning or using a learned projection layer that aligns text and image embeddings more closely might improve performance.
+            - **Broader Evaluation:** We focus on a subset of object categories. Extending to a more diverse and balanced object set, or evaluating on a specialized counting dataset (e.g., counting people, cars, or animals from complex scenes) could provide deeper insights.
+            - **Hyperparameter Tuning:** Systematic hyperparameter tuning, as well as experimenting with different optimization strategies or loss functions (e.g., Huber loss vs. MAE), might improve training stability and final performance.
+            
 		    </div>
 		    <div class="margin-right-block">
-						Margin note that clarifies some detail #main-content-block for intro section.
+						Margin note: The introduction section sets the stage for why counting with CLIP embeddings is interesting and motivates the use of a trained regressor.
 		    </div>
 		</div>
 
-		<div class="content-margin-container" id="does_x_do_y">
+
+		<div class="content-margin-container" id="method">
 				<div class="margin-left-block">
 				</div>
 		    <div class="main-content-block">
-					<h1>Does X do Y?</h1>
-				  It is well known that Y does Y. And this has raised the question does X do Y? Because if Y does Y then it stands to reason that X does Y.
-          But we cannot answer this until we realize the Z implies Y and X can be linked to Z.<br><br>
-
-          Now let's write some math!<br>
-          <center>
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mrow>
-                <mrow>
-                  <mo>&#x2202;</mo>
-                  <mi>y</mi>
-                </mrow>
-                <mo>/</mo>
-                <mrow>
-                  <mo>&#x2202;</mo>
-                  <mi>x</mi>
-                </mrow>
-              </mrow>
-              <mo>=</mo>
-              <mi>x</mi>
-            </math>
-          </center>
-          <br>
-          It's probably best to ask an LLM to help do the web
-          formatting for math. You can tell it "convert this latex equation into MathML: $$\frac{\partial dy}{\partial dx} = x$$"
-          But it took me a few tries. So, if you get frustrated, you can embed an image of the equation, or use other packages for
-          rendering equations on webpages.
-		    </div>
-		    <div class="margin-right-block" style="transform: translate(0%, -100%);"> <!-- you can move the margin notes up and down with translate -->
-          Interestingly, Plato also asked if X does Y, in <a href="#ref_1">[1]</a>.
-		    </div>
-		</div>
-
-		<div class="content-margin-container">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-            <h1>Another section</h1>
-            In this section we embed a video:
-						<video class='my-video' loop autoplay muted style="width: 725px">
-								<source src="./images/mtsh.mp4" type="video/mp4">
-						</video>
-		    </div>
-		    <div class="margin-right-block">
-					A caption for the video could go here.
-		    </div>
-		</div>
-
-		<div class="content-margin-container" id="implications_and_limitations">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-						<h1>Implications and limitations</h1>
-						Let's end with some discussion of the implications and limitations.
+					<h1>Methodology</h1>
+					<!-- This section will be filled in future steps -->
 		    </div>
 		    <div class="margin-right-block">
 		    </div>
 		</div>
 
-		<div class="content-margin-container" id="citations">
+		<div class="content-margin-container" id="experiments">
 				<div class="margin-left-block">
 				</div>
 		    <div class="main-content-block">
-						<div class='citation' id="references" style="height:auto"><br>
+					<h1>Experiments and Results</h1>
+					<!-- This section will be filled in future steps -->
+		    </div>
+		    <div class="margin-right-block">
+		    </div>
+		</div>
+
+
+		<div class="content-margin-container" id="discussion">
+				<div class="margin-left-block">
+				</div>
+		    <div class="main-content-block">
+					<h1>Discussion and Future Work</h1>
+					<!-- This section will be filled in future steps -->
+		    </div>
+		    <div class="margin-right-block">
+		    </div>
+		</div>
+
+		<div class="content-margin-container" id="references">
+				<div class="margin-left-block">
+				</div>
+		    <div class="main-content-block">
+						<div class='citation' style="height:auto"><br>
 							<span style="font-size:16px">References:</span><br><br>
-							<a id="ref_1"></a>[1] <a href="https://en.wikipedia.org/wiki/Allegory_of_the_cave">Allegory of the Cave</a>, Plato, c. 375 BC<br><br>
-							<a id="ref_2"></a>[2] <a href="">A Human-Level AGI</a>, OpenAI, 2025<br><br>
+              <!-- Add references here -->
+							[1] Radford, A. et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).<br><br>
+							[2] Lin, T.-Y. et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).<br><br>
 						</div>
 		    </div>
 		    <div class="margin-right-block">
-            <!-- margin notes for reference block here -->
 		    </div>
 		</div>
 
