@@ -1,315 +1,97 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="Teaching CLIP to Count: A Deep Learning Approach" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching CLIP to Count</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="shortcut icon" href="images/icon.ico">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Teaching CLIP to Count Objects</h1>
+            <div class="authors">
+                <p><a href="your_website">Your Name</a></p>
+                <p><a href="your_partner_website">Collaborator Name</a></p>
+            </div>
+            <p class="course-info">Final Project for 6.7960, MIT</p>
+        </div>
+    </header>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <nav class="sidebar">
+        <h2>Outline</h2>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#methodology">Methodology</a></li>
+            <li><a href="#experiments">Experiments and Results</a></li>
+            <li><a href="#discussion">Discussion and Future Work</a></li>
+            <li><a href="#references">References</a></li>
+        </ul>
+    </nav>
 
-<link rel="shortcut icon" href="images/icon.ico">
-<style type="text/css">
-	body {
-		background-color: #f5f9ff;
-	}
+    <main>
+        <section id="intro">
+            <div class="content">
+                <img src="images/your_image_here.png" alt="Representative Image" class="responsive-img">
+                <div class="caption">A representative image showcasing object counting scenario.</div>
+            </div>
+        </section>
 
-	/* Hide both math displays initially, will display based on JS detection */
-  .mathjax-mobile, .mathml-non-mobile { display: none; }
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>
+                The ability to count objects in images is a fundamental skill that humans acquire effortlessly. In computer vision, counting objects remains a challenging problem, especially when the categories and scenes vary significantly. Traditional supervised methods often rely on large, annotated datasets and carefully tuned architectures to perform counting tasks. With the advent of large-scale vision-language models like CLIP, which aligns images and text in a shared embedding space, a new paradigm emerges: leveraging powerful pre-trained features to tackle tasks such as counting in a zero-shot or few-shot manner.
+            </p>
+            <p>
+                In this project, we build upon OpenAI's CLIP model to perform object counting. We aim to answer the question: can we train a simple regression head on top of CLIP’s joint image-text embeddings to accurately count objects of a given category, and how does this approach compare to CLIP’s inherent zero-shot capabilities?
+            </p>
+            <h3>Key Contributions:</h3>
+            <ul>
+                <li>Utilize CLIP’s pre-trained visual and textual encoders to extract embeddings for images and corresponding object class descriptions.</li>
+                <li>Train a neural network regressor to predict the count of the specified object from the combined image-text embedding.</li>
+                <li>Compare this learned model against a zero-shot CLIP baseline, where we select the most similar text prompt among multiple possible counts.</li>
+            </ul>
+            <h3>Motivation:</h3>
+            <p>
+                While CLIP excels at recognizing concepts and can sometimes estimate the presence or absence of objects, counting requires more granular numeric reasoning. By training a custom head on top of CLIP embeddings, we investigate whether CLIP’s strong representation space can be extended to handle counting tasks robustly.
+            </p>
+        </section>
 
-  /* Show the MathML content by default on non-mobile devices */
-  .show-mathml .mathml-non-mobile { display: block; }
-  .show-mathjax .mathjax-mobile { display: block; }
+        <section id="methodology">
+            <h2>Methodology</h2>
+            <p>
+                <!-- Detailed methodology will be added here -->
+            </p>
+        </section>
 
-	.content-margin-container {
-		display: flex;
-		width: 100%; /* Ensure the container is full width */
-		justify-content: left; /* Horizontally centers the children in the container */
-		align-items: center;  /* Vertically centers the children in the container */
-	}
-	.main-content-block {
-		width: 70%; /* Change this percentage as needed */
-    max-width: 1100px; /* Optional: Maximum width */
-		background-color: #fff;
-		border-left: 1px solid #DDD;
-		border-right: 1px solid #DDD;
-		padding: 8px 8px 8px 8px;
-		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir";
-	}
-	.margin-left-block {
-			font-size: 14px;
-			width: 15%; /* Change this percentage as needed */
-			max-width: 130px; /* Optional: Maximum width */
-			position: relative;
-			margin-left: 10px;
-			text-align: left;
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir";
-			padding: 5px;
-	}
-	.margin-right-block {
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir";
-			font-size: 14px;
-			width: 25%; /* Change this percentage as needed */
-			max-width: 256px; /* Optional: Maximum width */
-			position: relative;
-			text-align: left;
-			padding: 10px;  /* Optional: Adds padding inside the caption */
-	}
+        <section id="experiments">
+            <h2>Experiments and Results</h2>
+            <p>
+                <!-- Detailed experiments and results will be added here -->
+            </p>
+        </section>
 
-	img {
-			max-width: 100%;
-			height: auto;
-			display: block;
-			margin: auto;
-	}
-	.my-video {
-			max-width: 100%;
-			height: auto;
-			display: block;
-			margin: auto;
-	}
+        <section id="discussion">
+            <h2>Discussion and Future Work</h2>
+            <p>
+                <!-- Detailed discussion and future work will be added here -->
+            </p>
+        </section>
 
-	a:link,a:visited
-	{
-		color: #0e7862; 
-		text-decoration: none;
-	}
-	a:hover {
-		color: #24b597; 
-	}
+        <section id="references">
+            <h2>References</h2>
+            <ol>
+                <li>Radford, A., et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).</li>
+                <li>Lin, T.-Y., et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).</li>
+                <!-- Additional references can be added here -->
+            </ol>
+        </section>
+    </main>
 
-	h1 {
-		font-size: 18px;
-		margin-top: 4px;
-		margin-bottom: 10px;
-	}
-
-	table.header {
-    font-weight: 300;
-    font-size: 17px;
-    flex-grow: 1;
-		width: 70%;
-    max-width: calc(100% - 290px); 
-	}
-	table td, table td * {
-	    vertical-align: middle;
-	    position: relative;
-	}
-	table.paper-code-tab {
-	    flex-shrink: 0;
-	    margin-left: 8px;
-	    margin-top: 8px;
-	    padding: 0px 0px 0px 8px;
-	    width: 290px;
-	    height: 150px;
-	}
-
-	.layered-paper {
-		box-shadow:
-		        0px 0px 1px 1px rgba(0,0,0,0.35),
-		        5px 5px 0 0px #fff,
-		        5px 5px 1px 1px rgba(0,0,0,0.35),
-		        10px 10px 0 0px #fff,
-		        10px 10px 1px 1px rgba(0,0,0,0.35);
-		margin-top: 5px;
-		margin-left: 10px;
-		margin-right: 30px;
-		margin-bottom: 5px;
-	}
-
-	hr {
-    height: 1px; 
-    border: none; 
-    background-color: #DDD; 
-  }
-
-	div.hypothesis {
-		width: 80%;
-		background-color: #EEE;
-		border: 1px solid black;
-		border-radius: 10px;
-		-moz-border-radius: 10px;
-		-webkit-border-radius: 10px;
-		font-family: Courier;
-		font-size: 18px;
-		text-align: center;
-		margin: auto;
-		padding: 16px 16px 16px 16px;
-	}
-
-	div.citation {
-    font-size: 0.8em;
-    background-color:#fff;
-    padding: 10px;
-		height: 200px;
-  }
-
-	.fade-in-inline {
-		position: absolute;
-		text-align: center;
-		margin: auto;
-		-webkit-mask-image: linear-gradient(to right,
-																			transparent 0%,
-																			transparent 40%,
-																			black 50%,
-																			black 90%,
-																			transparent 100%);
-		mask-image: linear-gradient(to right,
-																transparent 0%,
-																transparent 40%,
-																black 50%,
-																black 90%,
-																transparent 100%);
-		-webkit-mask-size: 8000% 100%;
-		mask-size: 8000% 100%;
-		animation-name: sweepMask;
-		animation-duration: 4s;
-		animation-iteration-count: infinite;
-		animation-timing-function: linear;
-		animation-delay: -1s;
-	}
-
-	.fade-in2-inline {
-			animation-delay: 1s;
-	}
-
-	.inline-div {
-			position: relative;
-	    display: inline-block;
-	    vertical-align: top; 
-	    width: 50px;
-	}
-
-</style>
-
-	  <title>A Project on Teaching CLIP to Count</title>
-      <meta property="og:title" content="A Project on Teaching CLIP to Count" />
-			<meta charset="UTF-8">
-  </head>
-
-  <body>
-
-		<div class="content-margin-container">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-						<table class="header" align=left>
-								<tr>
-									<td colspan=4>
-										<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace;">Training CLIP to Count Objects</span>
-									</td>
-								</tr>
-								<tr>
-									<td align=left>
-												<span style="font-size:17px"><a href="your_website">Your Name</a></span>
-										</td>
-										<td align=left>
-												<span style="font-size:17px"><a href="your_partner_website">Collaborator Name</a></span>
-										</td>
-								<tr>
-									<td colspan=4 align=left><span style="font-size:18px">Final project for 6.7960, MIT</span></td>
-								</tr>
-						</table>
-					</div>
-					<div class="margin-right-block">
-					</div>
-		</div>
-
-		<div class="content-margin-container" id="intro">
-				<div class="margin-left-block">
-          <!-- table of contents here -->
-          <div style="position:fixed; max-width:inherit; top:max(20%,120px)">
-              <b style="font-size:16px">Outline</b><br><br>
-              <a href="#intro">Introduction</a><br><br>
-              <a href="#method">Methodology</a><br><br>
-              <a href="#experiments">Experiments and Results</a><br><br>
-              <a href="#discussion">Discussion and Future Work</a><br><br>
-              <a href="#references">References</a><br><br>
-          </div>
-				</div>
-		    <div class="main-content-block">
-            <img src="./images/your_image_here.png" width=512px/>
-		    </div>
-		    <div class="margin-right-block">
-						A representative image (placeholder) showcasing object counting scenario.
-		    </div>
-		</div>
-
-    <div class="content-margin-container" id="intro">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-						<h1>Introduction</h1>
-            The ability to count objects in images is a fundamental skill that humans acquire effortlessly. In computer vision, counting objects remains a challenging problem, especially when the categories and scenes vary significantly. Traditional supervised methods often rely on large, annotated datasets and carefully tuned architectures to perform counting tasks. With the advent of large-scale vision-language models like CLIP, which aligns images and text in a shared embedding space, a new paradigm emerges: leveraging powerful pre-trained features to tackle tasks such as counting in a zero-shot or few-shot manner.
-
-            In this project, we build upon OpenAI's CLIP model to perform object counting. We aim to answer the question: can we train a simple regression head on top of CLIP’s joint image-text embeddings to accurately count objects of a given category, and how does this approach compare to CLIP’s inherent zero-shot capabilities?
-
-            **Key Contributions:**
-            - We use CLIP’s pre-trained visual and textual encoders to extract embeddings for images and corresponding object class descriptions.
-            - We train a neural network regressor to predict the count of the specified object from the combined image-text embedding.
-            - We compare this learned model against a zero-shot CLIP baseline, where we select the most similar text prompt among multiple possible counts.
-
-            **Motivation:**
-            While CLIP excels at recognizing concepts and can sometimes estimate the presence or absence of objects, counting requires more granular numeric reasoning. By training a custom head on top of CLIP embeddings, we investigate whether CLIP’s strong representation space can be extended to handle counting tasks robustly.
-
-            **Obvious Potential Improvements Missed:**
-            - **Data Augmentation:** We rely primarily on the original COCO dataset without extensive augmentation strategies (e.g., random crops, rotations, or synthetic variations) that could improve robustness and generalization.
-            - **More Advanced Architectures:** While we train a multi-layer perceptron (MLP) regressor, exploring more sophisticated architectures, such as transformer-based regressors or attention mechanisms over image patches, could yield higher accuracy.
-            - **Better Integration with CLIP:** Instead of a simple concatenation of embeddings, fine-tuning or using a learned projection layer that aligns text and image embeddings more closely might improve performance.
-            - **Broader Evaluation:** We focus on a subset of object categories. Extending to a more diverse and balanced object set, or evaluating on a specialized counting dataset (e.g., counting people, cars, or animals from complex scenes) could provide deeper insights.
-            - **Hyperparameter Tuning:** Systematic hyperparameter tuning, as well as experimenting with different optimization strategies or loss functions (e.g., Huber loss vs. MAE), might improve training stability and final performance.
-            
-		    </div>
-		    <div class="margin-right-block">
-						Margin note: The introduction section sets the stage for why counting with CLIP embeddings is interesting and motivates the use of a trained regressor.
-		    </div>
-		</div>
-
-
-		<div class="content-margin-container" id="method">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-					<h1>Methodology</h1>
-					<!-- This section will be filled in future steps -->
-		    </div>
-		    <div class="margin-right-block">
-		    </div>
-		</div>
-
-		<div class="content-margin-container" id="experiments">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-					<h1>Experiments and Results</h1>
-					<!-- This section will be filled in future steps -->
-		    </div>
-		    <div class="margin-right-block">
-		    </div>
-		</div>
-
-
-		<div class="content-margin-container" id="discussion">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-					<h1>Discussion and Future Work</h1>
-					<!-- This section will be filled in future steps -->
-		    </div>
-		    <div class="margin-right-block">
-		    </div>
-		</div>
-
-		<div class="content-margin-container" id="references">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-						<div class='citation' style="height:auto"><br>
-							<span style="font-size:16px">References:</span><br><br>
-              <!-- Add references here -->
-							[1] Radford, A. et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).<br><br>
-							[2] Lin, T.-Y. et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).<br><br>
-						</div>
-		    </div>
-		    <div class="margin-right-block">
-		    </div>
-		</div>
-
-	</body>
-
+    <footer>
+        <p>&copy; 2024 Your Name &amp; Collaborator Name</p>
+    </footer>
+</body>
 </html>
