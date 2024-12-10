@@ -16,6 +16,7 @@ header {
 .header-container h1 {
     font-size: 32px;
     margin: 0;
+    color: #0e7862;
 }
 
 .authors p {
@@ -35,6 +36,7 @@ header {
 .course-info {
     font-size: 18px;
     margin-top: 10px;
+    color: #555;
 }
 
 /* Sidebar Styles */
@@ -53,6 +55,7 @@ header {
 .sidebar h2 {
     font-size: 18px;
     margin-top: 0;
+    color: #0e7862;
 }
 
 .sidebar ul {
@@ -67,6 +70,7 @@ header {
 .sidebar ul li a {
     color: #0e7862;
     text-decoration: none;
+    font-size: 16px;
 }
 
 .sidebar ul li a:hover {
@@ -88,6 +92,7 @@ section img.responsive-img {
     height: auto;
     display: block;
     margin: 0 auto;
+    border-radius: 8px;
 }
 
 .caption {
@@ -97,14 +102,18 @@ section img.responsive-img {
     margin-top: 5px;
 }
 
+.text-content {
+    margin-top: 20px;
+}
+
 h2 {
-    font-size: 24px;
+    font-size: 28px;
     color: #0e7862;
     margin-bottom: 10px;
 }
 
 h3 {
-    font-size: 20px;
+    font-size: 22px;
     color: #0e7862;
     margin-top: 20px;
 }
@@ -121,15 +130,15 @@ ol {
 
 p {
     line-height: 1.6;
+    font-size: 16px;
 }
 
-/* Footer Styles */
 footer {
     background-color: #fff;
     border-top: 1px solid #DDD;
     text-align: center;
     padding: 10px;
-    position: fixed;
+    position: relative;
     width: 100%;
     bottom: 0;
 }
@@ -144,5 +153,11 @@ footer {
     }
     header, footer {
         padding: 15px;
+    }
+    h1, h2, h3 {
+        font-size: 24px;
+    }
+    .authors p, .course-info, .sidebar ul li a {
+        font-size: 16px;
     }
 }
