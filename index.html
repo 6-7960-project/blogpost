@@ -192,6 +192,7 @@
                 <li><strong>MAE:</strong> Defined as \( \frac{\sum_{i=1}^{N} |y_i - \hat{y}_i|}{N} \), MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
                 <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by \( \text{MMAE} = \frac{\sum_{i=1}^{N} \frac{|y_i - \hat{y}_i|}{y_i + 1}}{N} \). MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
             </ul>
+            
             <h3>Why Train on MMAE?</h3>
             <p>
                 For most counting tasks, an off-by-one error when the true count is small (e.g., 1) is more critical than the same error when the count is large (e.g., 54). By training directly on MMAE, we emphasize the importance of precision at low object counts, encouraging the model to be more careful and accurate when counts are small while still performing well in denser scenarios.
