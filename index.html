@@ -132,36 +132,18 @@
                 Additionally, with this approach, a large majority of lables would then be zero which would bias our model to predict zero. Thus we opted for taking every pair (image, object) where the object was in the image, and additionally added a fixed amount of (random)
                 datapoints where the count was zero. With this approach, there was still quite a bit of class imbalance, so after a bit of testing we rebalanced our training data, as to not bias our model.
             </p>
-            <ol>
-                <li>Consider all 80 object categories.</li>
-                <li>For each category, we gather all images containing that object.</li>
-                <li>Compute the counts of that object in each image.</li>
-            </ol>
-            <p>
-                <em>Add Image Here: Example of COCO Image with Multiple Objects</em>
-            </p>
-            <p>
-                However, object counts are naturally imbalanced; some objects may frequently appear in large numbers, while others rarely appear more than once. To ensure more robust training and to avoid bias towards under- or over-counting, we aim for a relatively uniform distribution of counts. This means:
-            </p>
-            <ul>
-                <li>If a particular category often has zero or one instance per image, we make sure we also include images with more instances of that category from elsewhere in the dataset.</li>
-                <li>Similarly, if some categories have very high counts, we downsample them to avoid skewing the training distribution too heavily towards large numbers.</li>
-            </ul>
-            <p>
-                This balanced selection approach ensures that the model sees a diverse range of counts for each category during training, making it better able to generalize. Equal representation of counts helps the model understand that counts can vary widely and that it should rely on the semantic meaning of the embeddings rather than learning trivial shortcuts (such as always predicting one or zero).
-            </p>
         </section>
 
         <!-- Model Section -->
         <section id="model">
-            <h2>Model</h2>
+            <h2>Model and Method</h2>
             <p>
                 Our model starts from the CLIP embeddings of the input image and the textual query. Given an input image and a corresponding query (e.g., "red cars"), we:
             </p>
             <ol>
-                <li>Use the CLIP image encoder to obtain an image embedding <code>I ∈ ℝ^d</code>.</li>
-                <li>Use the CLIP text encoder to obtain a text embedding <code>T ∈ ℝ^d</code>.</li>
-                <li>Concatenate these embeddings <code>X = [I; T] ∈ ℝ^{2d}</code>.</li>
+                <p>Use the CLIP image encoder to obtain an image embedding \( I \in \mathbb{R}^d \).</p>
+                <p>Use the CLIP text encoder to obtain a text embedding \( T \in \mathbb{R}^d \).</p>
+                <p>Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</p>
             </ol>
             <p>
                 We feed <code>X</code> into a customized Multi-Layer Perceptron (MLP) regressor. Our architecture leverages skip connections (residual connections), Batch Normalization, and Dropout. Skip connections help the network learn more effectively by providing direct pathways that mitigate gradient vanishing and exploding issues. Batch Normalization stabilizes learning, and Dropout regularizes the model to combat overfitting, improving generalization.
