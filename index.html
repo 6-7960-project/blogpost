@@ -148,11 +148,11 @@
                 <p>Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</p>
             </ol>
             <p>
-                We feed <p>X</p> into a customized Multi-Layer Perceptron (MLP) regressor. Our MLP uses five fully connected linear layers, including a skip connection inbetween them as well as batch normalization and drop out. After extensive testing, we
+                We feed <span>X</span> into a customized Multi-Layer Perceptron (MLP) regressor. Our MLP uses five fully connected linear layers, including a skip connection inbetween them as well as batch normalization and drop out. After extensive testing, we
                 arrived at this architecture - noting the following.
                 <ul>
                     <li>Skip connection greatly improved our val accuracy noteably because we are doing a counting problem, so intuitively it makes sense as the model needs some form of "memory".</li>
-                    <li>BatchNorm and Droput were used as to combat overfitting, as our model overfit on train very fast</li>
+                    <li>BatchNorm and Droput were used as to combat overfitting, as our model overfit on train very fast.</li>
                 </ul>
             </p>
             <h3>Enhanced MLP Regressor Architecture</h3>
