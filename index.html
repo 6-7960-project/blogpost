@@ -121,14 +121,16 @@
             <h2>Data Collection</h2>
             <p>
                 For our data, we used the COCO 2017 train and validation set <sup><a href="#ref-paiss2023">[4]</a></sup>. COCO (Common Objects in Context) contains over 100,000 images of different objects in multiple settings. Objects range from everyday fruits, to
-                more abstract nouns like person as well as other random nouns like umbrella and toilet. We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects then COCO) after modifying it. Namely, CountBench dataset has data of the form 
+                more abstract nouns like person as well as other random nouns like umbrella and toilet. It has annotations, so we were able to get data of the form (image, object, count). We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects then COCO) after modifying it. Namely, CountBench dataset has data of the form 
                 (image, caption, number) - so an example is a picture of headsets, with the caption being "We review the ten best gaming headsets in the market" and the number being 10 as there are 10 headsets. However, as stated, our model has the input of an image and the word
                 description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT 4o to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
                 faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
             </p>
             <h3>Data Subset Selection and Balancing Counts</h3>
             <p>
-                For training and validation, we use the <code>trainval2017</code> split of COCO, which contains over 118,000 images. Each image may contain multiple instances of various object classes. To create our training and validation sets, we:
+                For training, we first thought of using every possible pair (image, object) where images are and objects are taken from train2017. However, as train2017 had 18GB of images, and there were 80 objects this was not viable. 
+                Additionally, with this approach, a large majority of lables would then be zero which would bias our model to predict zero. Thus we opted for taking every pair (image, object) where the object was in the image, and additionally added a fixed amount of (random)
+                datapoints where the count was zero. With this approach, there was still quite a bit of class imbalance, so after a bit of testing we rebalanced our training data, as to not bias our model.
             </p>
             <ol>
                 <li>Consider all 80 object categories.</li>
