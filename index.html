@@ -127,7 +127,6 @@
         </section>
 
         <!-- Data Collection Section -->
-        <!-- Data Collection Section -->
         <section id="data_collection">
             <h2>Data Collection</h2>
             <p>
@@ -137,6 +136,11 @@
                 description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT-4 to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
                 faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
             </p>
+            <h3>Example COCO Dataset Visualization</h3>
+            <div class="content">
+                <img src="images/coco_example.png" alt="Example from COCO Dataset" class="responsive-img">
+                <p class="caption">Figure 1: An example image from the COCO dataset with bounding box annotations for multiple objects. This image showcases the dataset's richness and complexity.</p>
+            </div>
             <h3>Data Subset Selection and Balancing Counts</h3>
             <p>
                 For training, we first thought of using every possible pair (image, object) where images are and objects are taken from train2017. However, as train2017 had 18GB of images, and there were 80 objects this was not viable. 
@@ -146,9 +150,9 @@
             <div class="content">
                 <h3>Count Distributions Before and After Balancing</h3>
                 <img src="images/original_distribution.png" alt="Original Count Distribution" class="responsive-img">
-                <p class="caption">Figure 1: The original count distribution of object-image pairs in the COCO dataset, showing significant imbalance.</p>
+                <p class="caption">Figure 2: The original count distribution of object-image pairs in the COCO dataset, showing significant imbalance.</p>
                 <img src="images/balanced_distribution.png" alt="Balanced Count Distribution" class="responsive-img">
-                <p class="caption">Figure 2: The count distribution after balancing the dataset, resulting in a more uniform representation of object counts.</p>
+                <p class="caption">Figure 3: The count distribution after balancing the dataset, resulting in a more uniform representation of object counts.</p>
             </div>
         </section>
 
