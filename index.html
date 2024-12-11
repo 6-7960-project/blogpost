@@ -107,15 +107,12 @@
                 Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
             </p>
             <p>
-                <strong>Contrastive Vision-Language Models:</strong> Vision-language models have demonstrated impressive success in vision and multimodal tasks. Models like CLIP and BASIC are trained with a contrastive objective, 
-                aligning matching text-image pairs closely while distancing non-matching pairs in the embedding space. However, these models struggle with tasks requiring precise numerical reasoning, such as counting.
+                <strong>Zero-Shot Object Counting with Language-Vision Models</strong> <sup><a href="#ref-2309-13097">[1]</a></sup> This paper introduces Zero-Shot Object Counting (ZSC), a new setting where only a class name is known at test time, 
+                eliminating the need for human-selected exemplars. Instead, the method automatically extracts exemplar patches from the input image itself. Using large vision-language models like CLIP and Stable Diffusion, 
+                it identifies and selects patches that represent the target object class. A ranking model then picks the patches that minimize counting errors. 
+                Experiments on the FSC-147 dataset demonstrate that this approach effectively counts objects without relying on manual annotations.
             </p>
-            <p>
-                <strong>Subitizing in Computer Vision:</strong> Subitizing refers to the ability to instantly recognize the number of objects without counting. While humans can subitize up to a small number of objects (typically 4), VLMs like CLIP lack this capability, especially for larger numbers. Previous works have focused on limited object counts within subitizing ranges but have not addressed the broader counting problem.
-            </p>
-            <p>
-                <strong>Counting in Vision-Language Models:</strong> Existing efforts to incorporate counting into VLMs have been confined to specific architectures like Visual Question Answering (VQA). Our approach differs by enhancing general-purpose contrastive VLMs to include counting capabilities without being tied to specific tasks or domains.
-            </p>
+
         </section>
 
         <!-- Data Collection Section -->
@@ -281,14 +278,22 @@
         <section id="references">
             <h2>References</h2>
             <ol>
-                <li id="ref-clip">Radford, A., et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).</li>
-                 <!-- Other references here -->
+                <li id="ref-clip">
+                    Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., ... Sutskever, I. (2021).
+                    "<em>Learning Transferable Visual Models From Natural Language Supervision</em>."
+                    In Proceedings of the International Conference on Machine Learning (ICML).
+                    <a href="https://arxiv.org/abs/2103.00020" target="_blank">arXiv:2103.00020</a>.
+                </li>
                 <li id="ref-paiss2023">
-                    Paiss, Roni, Ariel Ephrat, Omer Tov, Shiran Zada, Inbar Mosseri, Michal Irani, & Tali Dekel (2023). 
-                    "<em>Teaching CLIP to Count to Ten</em>." 
+                    Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. (2023).
+                    "<em>Teaching CLIP to Count to Ten</em>."
                     <a href="https://arxiv.org/abs/2302.12066" target="_blank">arXiv:2302.12066</a>.
                 </li>
-
+                <li id="ref-2309-13097">
+                    Xu, J., Le, H., & Samaras, D. (2023).
+                    "<em>Zero-Shot Object Counting with Language-Vision Models</em>."
+                    <a href="https://arxiv.org/abs/2309.13097" target="_blank">arXiv:2309.13097</a>.
+                </li>
                 <li>Lin, T.-Y., et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).</li>
                 <li>Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. "Teaching CLIP to Count to Ten." arXiv preprint arXiv:2302.12066 (2023).</li>
                 <li>He, K., Zhang, X., Ren, S., & Sun, J. "Deep Residual Learning for Image Recognition." CVPR (2016).</li>
