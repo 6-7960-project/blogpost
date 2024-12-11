@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,50 +8,229 @@
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="shortcut icon" href="images/icon.ico">
     
+    <!-- Improved Accessibility and SEO -->
+    <meta name="description" content="A deep learning approach to enhance CLIP's object counting capabilities using an enhanced MLP regressor.">
+    <meta name="keywords" content="CLIP, Object Counting, Deep Learning, Computer Vision, Machine Learning, COCO Dataset">
+    
+    <!-- MathJax and Mermaid for Diagrams -->
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" id="MathJax-script" async></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>
 
+    <!-- Smooth Scrolling and Sidebar Highlighting -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
+        /* Header Styling */
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+        }
+        .header-container {
+            width: 90%;
+            margin: auto;
+            text-align: center;
+        }
+        .header-container h1 {
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+        .header-container .authors p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .header-container .authors a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .header-container .authors a:hover {
+            text-decoration: underline;
+        }
+        .header-container .course-info {
+            font-style: italic;
+            color: #ddd;
+            font-size: 1em;
+        }
+
+        /* Layout Styling */
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar Styling */
+        nav.sidebar {
+            width: 220px;
+            background-color: #f8f8f8;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+        nav.sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        nav.sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav.sidebar ul li {
+            margin: 10px 0;
+        }
+        nav.sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1em;
+            display: block;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav.sidebar ul li a:hover,
+        nav.sidebar ul li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Main Content Styling */
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 1000px;
+            box-sizing: border-box;
+        }
+        main section {
+            margin-bottom: 50px;
+        }
+        main section h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        main section h3 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            font-size: 1.4em;
+        }
+        main section p, main section ul, main section ol {
+            line-height: 1.6;
+            font-size: 1em;
+        }
+        main section ul, main section ol {
+            margin-left: 20px;
+        }
+
+        /* Image Styling */
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .caption {
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            nav.sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid #ddd;
+            }
+            main {
+                max-width: 100%;
+            }
+            nav.sidebar ul li a {
+                font-size: 1.1em;
+            }
+        }
+
+        /* Mermaid Diagram Styling */
+        .mermaid {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
     <header>
         <div class="header-container">
             <h1>Teaching CLIP to Count Objects</h1>
             <div class="authors">
-                <p><a href="your_website">Margulan Ismoldayev</a></p>
-                <p><a href="your_partner_website">Mateja Vukelic</a></p>
+                <p><a href="your_website" target="_blank">Margulan Ismoldayev</a></p>
+                <p><a href="your_partner_website" target="_blank">Mateja Vukelic</a></p>
             </div>
             <p class="course-info">Final Project for 6.7960, MIT</p>
         </div>
     </header>
 
-    <nav class="sidebar">
-        <h2>Outline</h2>
-        <ul>
-            <li><a href="#abstract">Abstract</a></li>
-            <li><a href="#introduction">Introduction</a></li>
-            <li><a href="#related_work">Related Work</a></li>
-            <li><a href="#data_collection">Data Collection</a></li>
-            <li><a href="#model">Model</a></li>
-            <li><a href="#training_evaluation">Training and Evaluation Metrics</a></li>
-            <li><a href="#experiments">Experiments and Results</a></li>
-            <li><a href="#discussion">Discussion and Future Work</a></li>
-            <li><a href="#references">References</a></li>
-        </ul>
-    </nav>
+    <div class="content-wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>Outline</h2>
+            <ul>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#related_work">Related Work</a></li>
+                <li><a href="#data_collection">Data Collection</a></li>
+                <li><a href="#data_processing_pipeline">Data Processing Pipeline</a></li>
+                <li><a href="#model_architecture">Model Architecture</a></li>
+                <li><a href="#training_workflow">Training Workflow</a></li>
+                <li><a href="#model">Model and Method</a></li>
+                <li><a href="#training_evaluation">Training and Evaluation Metrics</a></li>
+                <li><a href="#experiments">Experiments and Results</a></li>
+                <li><a href="#discussion">Discussion and Future Work</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </nav>
 
-    <main>
-        <!-- Abstract Section -->
-        <section id="abstract">
-            <div class="text-content">
+        <!-- Main Content -->
+        <main>
+            <!-- Abstract Section -->
+            <section id="abstract">
                 <h2>Abstract</h2>
                 <p>
                     Counting objects of a specified type within images is a critical task in computer vision, applicable to domains such as surveillance, 
-                    inventory management, and autonomous navigation. In this work, we leverage the Contrastive Language-Image Pre-training (CLIP) model 
-                    to develop a streamlined and effective object counting framework. Our approach utilizes CLIP's pre-trained image and text embeddings 
+                    inventory management, and autonomous navigation. Accurately determining the number of instances of specific object categories in diverse and 
+                    complex scenes remains a challenging problem, particularly due to variations in object appearances, occlusions, and background clutter.
+                </p>
+                <p>
+                    In this work, we leverage the Contrastive Language-Image Pre-training (CLIP) model to develop a streamlined and effective object counting framework. Our approach utilizes CLIP's pre-trained image and text embeddings 
                     to create a comprehensive feature representation, which is then fed into a Multi-Layer Perceptron (MLP) regressor trained to predict 
                     object counts directly. Unlike traditional methods that depend on generating intermediate representations like heat maps or density 
                     estimations, our model operates entirely within the embedding space, simplifying the pipeline and reducing computational overhead. 
@@ -63,16 +240,14 @@
                     By integrating residual connections and regularization techniques within the MLP architecture, we enhance the model's stability and 
                     generalization. Our findings demonstrate that leveraging CLIP's rich semantic embeddings provides a scalable and adaptable solution for object counting tasks.
                 </p>
-            </div>
-        </section>
+            </section>
 
-        <!-- Introduction Section -->
-        <section id="introduction">
-            <div class="content">
-                <img src="images/tworanges.jpg" alt="Representative Image" class="responsive-img">
-                <div class="caption">A picture of two oranges where our model predicts 1.610, which gets rounded to 2.</div>
-            </div>
-            <div class="text-content">
+            <!-- Introduction Section -->
+            <section id="introduction">
+                <div class="content">
+                    <img src="images/tworanges.jpg" alt="Two Oranges Example" class="responsive-img">
+                    <div class="caption">Figure 1: A picture of two oranges where our model predicts 1.610, which gets rounded to 2.</div>
+                </div>
                 <h2>Introduction</h2>
                 <p>
                     Object counting within images is a fundamental task in computer vision, integral to applications such as surveillance, inventory 
@@ -100,364 +275,388 @@
                     training. By designing our model to generalize across various object types without requiring explicit retraining, we aim to create a versatile 
                     and scalable counting solution. Our experiments on the COCO and CountBench datasets validate the effectiveness of our approach, demonstrating competitive performance and highlighting areas for future improvement.
                 </p>
-            </div>
-        </section>
+            </section>
 
+            <!-- Related Work Section -->
+            <section id="related_work">
+                <h2>Related Work</h2>
+                <p>
+                    Large vision-language models (VLMs), such as CLIP, learn rich joint image-text representations, facilitating advances in numerous downstream tasks, including zero-shot classification and text-to-image generation. 
+                    Nevertheless, existing VLMs exhibit a prominent well-documented limitation – they fail to encapsulate compositional concepts such as counting. Despite this, many other papers managed to improve CLIP's (or some other VLM's) counting capabilities, 
+                    however, all of the existing literature differs from our approach. We approach this problem as a regression task, and thus make our pipeline simpler, while still maintaining better accuracy over zero-shot.
+                </p>
+                <p>
+                    <strong>Teaching CLIP to Count to Ten</strong> <sup><a href="#ref-paiss2023">[2]</a></sup> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
+                    They propose a counting-contrastive loss to finetune a pre-trained VLM, enabling it to distinguish between correct and counterfactual object counts in image-text pairs. 
+                    Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
+                </p>
+                <p>
+                    <strong>Zero-Shot Object Counting with Language-Vision Models</strong> <sup><a href="#ref-2309-13097">[3]</a></sup> This paper introduces Zero-Shot Object Counting (ZSC), a new setting where only a class name is known at test time, 
+                    eliminating the need for human-selected exemplars. Instead, the method automatically extracts exemplar patches from the input image itself. Using large vision-language models like CLIP and Stable Diffusion, 
+                    it identifies and selects patches that represent the target object class. A ranking model then picks the patches that minimize counting errors. 
+                    Experiments on the FSC-147 dataset demonstrate that this approach effectively counts objects without relying on manual annotations.
+                </p>
+            </section>
 
-        <!-- Related Work Section -->
-        <section id="related_work">
-            <h2>Related Work</h2>
-            <p>
-                Large vision-language models (VLMs), such as CLIP, learn rich joint image-text representations, facilitating advances in numerous downstream tasks, including zero-shot classification and text-to-image generation. 
-                Nevertheless, existing VLMs exhibit a prominent well-documented limitation – they fail to encapsulate compositional concepts such as counting. Despite this, many other papers managed to improve CLIP's (or some other VLM's) counting capabilities, 
-                however, all of the existing literature differs from our approach. We approach this problem as a regression task, and thus make our pipeline simpler, while still maintaing better accuracy over zero-shot.
-            </p>
-            <p>
-                <strong>Teaching CLIP to Count to Ten</strong> <sup><a href="#ref-paiss2023">[2]</a></sup> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
-                They propose a counting-contrastive loss to finetune a pre-trained VLM, enabling it to distinguish between correct and counterfactual object counts in image-text pairs. 
-                Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
-            </p>
-            <p>
-                <strong>Zero-Shot Object Counting with Language-Vision Models</strong> <sup><a href="#ref-2309-13097">[3]</a></sup> This paper introduces Zero-Shot Object Counting (ZSC), a new setting where only a class name is known at test time, 
-                eliminating the need for human-selected exemplars. Instead, the method automatically extracts exemplar patches from the input image itself. Using large vision-language models like CLIP and Stable Diffusion, 
-                it identifies and selects patches that represent the target object class. A ranking model then picks the patches that minimize counting errors. 
-                Experiments on the FSC-147 dataset demonstrate that this approach effectively counts objects without relying on manual annotations.
-            </p>
+            <!-- Data Collection Section -->
+            <section id="data_collection">
+                <h2>Data Collection</h2>
+                <p>
+                    For our data, we used the COCO 2017 train and validation sets <sup><a href="#ref-paiss2023">[4]</a></sup>. COCO (Common Objects in Context) contains over 100,000 images of different objects in multiple settings. Objects range from everyday fruits to
+                    more abstract nouns like person as well as other random nouns like umbrella and toilet. It has annotations, so we were able to get data of the form (image, object, count). We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects than COCO) after modifying it. Namely, the CountBench dataset has data of the form 
+                    (image, caption, number) - so an example is a picture of headsets, with the caption being "We review the ten best gaming headsets in the market" and the number being 10 as there are 10 headsets. However, as stated, our model has the input of an image and the word
+                    description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset by using the OpenAI API and prompting ChatGPT-4 to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
+                    faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
+                </p>
+                <h3>Example Visualization: Counting Multiple Objects</h3>
+                <div class="content">
+                    <img src="images/coco_masking_demo.gif" alt="COCO Dataset GIF Showing Object Counts" class="responsive-img">
+                    <div class="caption">Figure 2: A GIF demonstrating how different objects in a COCO image are counted by masking them. Each frame highlights a specific object type, and we count the number of objects of that specific type.</div>
+                </div>
+                <h3>Data Subset Selection and Balancing Counts</h3>
+                <p>
+                    For training, we first thought of using every possible pair (image, object) where images are and objects are taken from train2017. However, as train2017 had 18GB of images, and there were 80 objects, this was not viable. 
+                    Additionally, with this approach, a large majority of labels would then be zero, which would bias our model to predict zero. Thus, we opted for taking every pair (image, object) where the object was in the image and additionally added a fixed amount of (random)
+                    datapoints where the count was zero. With this approach, there was still quite a bit of class imbalance, so after a bit of testing we rebalanced our training data to not bias our model.
+                </p>
+                <div class="content">
+                    <h3>Count Distributions Before and After Balancing</h3>
+                    <img src="images/original_distribution.png" alt="Original Count Distribution" class="responsive-img">
+                    <div class="caption">Figure 3: The original count distribution of object-image pairs in the COCO dataset, showing significant imbalance.</div>
+                    <img src="images/balanced_distribution.png" alt="Balanced Count Distribution" class="responsive-img">
+                    <div class="caption">Figure 4: The count distribution after balancing the dataset, resulting in a more uniform representation of object counts.</div>
+                </div>
+            </section>
 
-        </section>
-
-        <!-- Data Collection Section -->
-        <section id="data_collection">
-            <h2>Data Collection</h2>
-            <p>
-                For our data, we used the COCO 2017 train and validation set <sup><a href="#ref-paiss2023">[4]</a></sup>. COCO (Common Objects in Context) contains over 100,000 images of different objects in multiple settings. Objects range from everyday fruits to
-                more abstract nouns like person as well as other random nouns like umbrella and toilet. It has annotations, so we were able to get data of the form (image, object, count). We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects than COCO) after modifying it. Namely, the CountBench dataset has data of the form 
-                (image, caption, number) - so an example is a picture of headsets, with the caption being "We review the ten best gaming headsets in the market" and the number being 10 as there are 10 headsets. However, as stated, our model has the input of an image and the word
-                description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT-4 to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
-                faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
-            </p>
-            <h3>Example Visualization: Counting Multiple Objects</h3>
-            <div class="content">
-                <img src="images/coco_masking_demo.gif" alt="COCO Dataset GIF Showing Object Counts" class="responsive-img">
-                <p class="caption">Figure 1: A GIF demonstrating how different objects in a COCO image are counted by masking them. Each frame highlights a specific object type, and we count the number of objects of that specific type.</p>
-            </div>
-            <h3>Data Subset Selection and Balancing Counts</h3>
-            <p>
-                For training, we first thought of using every possible pair (image, object) where images are and objects are taken from train2017. However, as train2017 had 18GB of images, and there were 80 objects this was not viable. 
-                Additionally, with this approach, a large majority of labels would then be zero, which would bias our model to predict zero. Thus, we opted for taking every pair (image, object) where the object was in the image and additionally added a fixed amount of (random)
-                datapoints where the count was zero. With this approach, there was still quite a bit of class imbalance, so after a bit of testing we rebalanced our training data, as to not bias our model.
-            </p>
-            <div class="content">
-                <h3>Count Distributions Before and After Balancing</h3>
-                <img src="images/original_distribution.png" alt="Original Count Distribution" class="responsive-img">
-                <p class="caption">Figure 2: The original count distribution of object-image pairs in the COCO dataset, showing significant imbalance.</p>
-                <img src="images/balanced_distribution.png" alt="Balanced Count Distribution" class="responsive-img">
-                <p class="caption">Figure 3: The count distribution after balancing the dataset, resulting in a more uniform representation of object counts.</p>
-            </div>
-        </section>
-
-
-
-        <!-- Model Section -->
-        <section id="model">
-            <h2>Model and Method</h2>
-            <p>
-                Our model starts from the CLIP embeddings of the input image and the textual query. Given an input image and a corresponding query (e.g., "red cars"), we:
-            </p>
-            <ol>
-                <li> <span>Use the CLIP image encoder to obtain an image embedding \( I \in \mathbb{R}^d \).</span> </li>
-                <li> <span>Use the CLIP text encoder to obtain a text embedding \( T \in \mathbb{R}^d \).</span> </li>
-                <li> <span>Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</span> </li>
-            </ol>
-            <p>
-                We feed <span>X</span> into a customized Multi-Layer Perceptron (MLP) regressor. Our MLP uses five fully connected linear layers, including a skip connection inbetween them as well as batch normalization and drop out. After extensive testing, we
-                arrived at this architecture - noting the following.
+            <!-- Model and Method Section -->
+            <section id="model">
+                <h2>Model and Method</h2>
+                <p>
+                    Our model starts from the CLIP embeddings of the input image and the textual query. Given an input image and a corresponding query (e.g., "red cars"), we:
+                </p>
+                <ol>
+                    <li><strong>Image Embedding:</strong> Use the CLIP image encoder to obtain an image embedding \( I \in \mathbb{R}^d \).</li>
+                    <li><strong>Text Embedding:</strong> Use the CLIP text encoder to obtain a text embedding \( T \in \mathbb{R}^d \).</li>
+                    <li><strong>Concatenation:</strong> Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</li>
+                </ol>
+                <p>
+                    We feed <strong>X</strong> into a customized Multi-Layer Perceptron (MLP) regressor. Our MLP uses five fully connected linear layers, including a skip connection in between them as well as batch normalization and dropout. After extensive testing, we arrived at this architecture, noting the following:
+                </p>
                 <ul>
-                    <li>Skip connection greatly improved our val accuracy noteably because we are doing a counting problem, so intuitively it makes sense as the model needs some form of "memory".</li>
-                    <li>BatchNorm and Droput were used as to combat overfitting, as our model overfit on train very fast.</li>
+                    <li><strong>Skip Connection:</strong> Greatly improved our validation accuracy notably because we are addressing a counting problem, so intuitively it makes sense as the model needs some form of "memory".</li>
+                    <li><strong>Batch Normalization and Dropout:</strong> Employed to combat overfitting, as our model overfitted on training data very quickly.</li>
                 </ul>
-            </p>
-           
+            </section>
 
+            <!-- Training and Evaluation Metrics Section -->
+            <section id="training_evaluation">
+                <h2>Training and Evaluation Metrics</h2>
+                <h3>RMSE, MAE, and MMAE Definitions</h3>
+                <ul>
+                    <li><strong>RMSE:</strong> Defined as \( \sqrt{\frac{\sum_{i=1}^{N} (y_i - \hat{y}_i)^2}{N}} \), where \( y_i \) is the ground-truth count and \( \hat{y}_i \) is the predicted count. RMSE heavily penalizes large errors and is sensitive to outliers. It is a common metric in regression tasks.</li>
+                    <li><strong>MAE:</strong> Defined as \( \frac{\sum_{i=1}^{N} |y_i - \hat{y}_i|}{N} \), MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
+                    <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by \( \text{MMAE} = \frac{\sum_{i=1}^{N} \frac{|y_i - \hat{y}_i|}{y_i + 1}}{N} \). MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
+                </ul>
+                
+                <h3>Why Train on MMAE?</h3>
+                <p>
+                    For most counting tasks, an off-by-one error when the true count is small (e.g., 1) is more critical than the same error when the count is large (e.g., 54). By training directly on MMAE, we emphasize the importance of precision at low object counts, encouraging the model to be more careful and accurate when counts are small while still performing well in denser scenarios.
+                </p>
+            </section>
 
+            <!-- Experiments and Results Section -->
+            <section id="experiments">
+                <h2>Experiments and Results</h2>
+                <p>
+                    After training our model on the aforementioned training data, we conducted experiments on our validation data - which in our case was all pairs of (image, object) in val2017 such that the actual count is greater than zero, and 5000 random zero samples,
+                    just to check. We additionally evaluated CLIP zero-shot on the same dataset in the following way. For each image and each object, we made ten prompts of the form: "A photo of {i} {object}" being careful about where we use plural vs singular.
+                    From these results, we see that our pipeline of CLIP + MLP is substantially better for lower counts (0,1,2,3,4) however performs the same or worse for bigger counts. We think this happens as there is not a lot of higher count labels in the training data, compared
+                    to the lower counts, so our model does not have enough data to learn efficiently. Overall accuracy improves by 40%, which leads us to believe that if given enough images that contain a certain object, our model will be able to generalize and substantially improve
+                    accuracy in predicting the count of that object.
+                </p>
+                <p>
+                    We additionally wanted to test whether our model generalizes for objects - so will it be able to accurately count some object in an image where the object is not in the training data.
+                    For this, we used the Modified CountBench dataset. Recall, that this dataset was made by summarizing captions using ChatGPT-4 so it might be faulty, but we still include it, as the results are interesting.
+                </p>
+                
+                <!-- Improved Table Styling and Content -->
+                <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                    }
 
-
-        </section>
-
-        <!-- Training and Evaluation Metrics Section -->
-        <section id="training_evaluation">
-            <h2>Training and Evaluation Metrics</h2>
-            <h3>RMSE, MAE, and MMAE Definitions</h3>
-            <ul>
-                <li><strong>RMSE:</strong> Defined as \( \sqrt{\frac{\sum_{i=1}^{N} (y_i - \hat{y}_i)^2}{N}} \), where \( y_i \) is the ground-truth count and \( \hat{y}_i \) is the predicted count. RMSE heavily penalizes large errors and is sensitive to outliers. It is a common metric in regression tasks.</li>
-                <li><strong>MAE:</strong> Defined as \( \frac{\sum_{i=1}^{N} |y_i - \hat{y}_i|}{N} \), MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
-                <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by \( \text{MMAE} = \frac{\sum_{i=1}^{N} \frac{|y_i - \hat{y}_i|}{y_i + 1}}{N} \). MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
-            </ul>
+                    table.metrics-table {
+                        border-collapse: collapse;
+                        margin: 20px 0;
+                        width: 100%;
+                        max-width: 1000px;
+                        font-size: 13px;
+                    }
+                    .metrics-table thead th {
+                        background-color: #f7f7f7;
+                        font-weight: bold;
+                        text-align: center;
+                        border-bottom: 2px solid #ddd;
+                    }
+                    .metrics-table th, .metrics-table td {
+                        padding: 6px 8px;
+                        border: 1px solid #eee;
+                        text-align: center;
+                    }
+                    .metrics-table tbody tr:nth-child(even) {
+                        background-color: #fafafa;
+                    }
+                    .metrics-table tfoot td {
+                        font-weight: bold;
+                        background-color: #f7f7f7;
+                    }
+                    .metrics-table td:first-child {
+                        text-align: left;
+                        font-weight: bold;
+                    }
+                </style>
+                
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Count</th>
+                            <th colspan="4">Model 1 (CLIP)</th>
+                            <th colspan="4">Model 2 (CLIP + MLP)</th>
+                        </tr>
+                        <tr>
+                            <th>Accuracy (%)</th>
+                            <th>MMAE</th>
+                            <th>MAE</th>
+                            <th>RMSE</th>
+                            <th>Accuracy (%)</th>
+                            <th>MMAE</th>
+                            <th>MAE</th>
+                            <th>RMSE</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>3.00</td>
+                            <td>3.23</td>
+                            <td>3.23</td>
+                            <td>3.36</td>
+                            <td>73.00</td>
+                            <td>0.39</td>
+                            <td>0.39</td>
+                            <td>0.79</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>22.00</td>
+                            <td>1.32</td>
+                            <td>2.64</td>
+                            <td>3.79</td>
+                            <td>59.00</td>
+                            <td>0.30</td>
+                            <td>0.59</td>
+                            <td>0.94</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>17.00</td>
+                            <td>0.86</td>
+                            <td>2.59</td>
+                            <td>3.44</td>
+                            <td>42.00</td>
+                            <td>0.25</td>
+                            <td>0.75</td>
+                            <td>1.01</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>13.00</td>
+                            <td>0.60</td>
+                            <td>2.41</td>
+                            <td>3.00</td>
+                            <td>27.00</td>
+                            <td>0.27</td>
+                            <td>1.07</td>
+                            <td>1.31</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>12.00</td>
+                            <td>0.52</td>
+                            <td>2.59</td>
+                            <td>3.01</td>
+                            <td>14.00</td>
+                            <td>0.31</td>
+                            <td>1.53</td>
+                            <td>1.83</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>6.00</td>
+                            <td>0.45</td>
+                            <td>2.72</td>
+                            <td>3.14</td>
+                            <td>6.00</td>
+                            <td>0.38</td>
+                            <td>2.29</td>
+                            <td>2.53</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>13.00</td>
+                            <td>0.43</td>
+                            <td>3.00</td>
+                            <td>3.69</td>
+                            <td>2.00</td>
+                            <td>0.44</td>
+                            <td>3.06</td>
+                            <td>3.29</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>11.00</td>
+                            <td>0.42</td>
+                            <td>3.36</td>
+                            <td>4.12</td>
+                            <td>1.00</td>
+                            <td>0.47</td>
+                            <td>3.77</td>
+                            <td>4.00</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>6.00</td>
+                            <td>0.45</td>
+                            <td>4.03</td>
+                            <td>4.86</td>
+                            <td>2.00</td>
+                            <td>0.52</td>
+                            <td>4.70</td>
+                            <td>4.99</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>7.00</td>
+                            <td>0.47</td>
+                            <td>4.70</td>
+                            <td>5.66</td>
+                            <td>1.00</td>
+                            <td>0.56</td>
+                            <td>5.63</td>
+                            <td>5.89</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Total</td>
+                            <td>14.00</td>
+                            <td>1.64</td>
+                            <td>2.84</td>
+                            <td>3.61</td>
+                            <td>53.00</td>
+                            <td>0.32</td>
+                            <td>0.83</td>
+                            <td>1.45</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
             
-            <h3>Why Train on MMAE?</h3>
-            <p>
-                For most counting tasks, an off-by-one error when the true count is small (e.g., 1) is more critical than the same error when the count is large (e.g., 54). By training directly on MMAE, we emphasize the importance of precision at low object counts, encouraging the model to be more careful and accurate when counts are small while still performing well in denser scenarios.
-            </p>
-        </section>
+            <!-- Discussion and Future Work Section -->
+            <section id="discussion">
+                <h2>Discussion and Future Work</h2>
+                <h3>Strengths:</h3>
+                <ul>
+                    <li><strong>Improved Accuracy:</strong> The regression model shows substantial improvements in counting accuracy compared to zero-shot CLIP.</li>
+                    <li><strong>Maintained Generalization:</strong> The enhanced model retains CLIP’s performance on general vision-language tasks, ensuring broad applicability.</li>
+                    <li><strong>Scalability:</strong> The method can be extended to accommodate more object categories and larger counts with further data augmentation and model tuning.</li>
+                </ul>
+                <h3>Limitations:</h3>
+                <ul>
+                    <li><strong>Data Imbalance:</strong> Despite balancing efforts, certain object counts remain underrepresented, potentially affecting model performance.</li>
+                    <li><strong>Dependency on Object Detection:</strong> The initial object detection step may introduce errors if objects are not accurately detected.</li>
+                    <li><strong>Scalability to Larger Counts:</strong> Extending the model to accurately count beyond ten objects remains a challenge due to data scarcity.</li>
+                </ul>
+                <h3>Future Directions:</h3>
+                <ul>
+                    <li><strong>Enhanced Data Augmentation:</strong> Implement advanced data augmentation and synthetic data generation to balance and expand the dataset.</li>
+                    <li><strong>Advanced Architectures:</strong> Explore transformer-based models and attention mechanisms to further improve counting accuracy.</li>
+                    <li><strong>Fine-Tuning CLIP:</strong> Fine-tune the entire CLIP model, not just the regression head, to better integrate counting capabilities.</li>
+                    <li><strong>Broader Evaluation:</strong> Test the model on more diverse and specialized counting datasets to validate its robustness.</li>
+                    <li><strong>Interactive Interface:</strong> Develop an interactive web interface for real-time object counting predictions.</li>
+                </ul>
+            </section>
 
-        <!-- Experiments and Results Section -->
-        <section id="experiments">
-            <h2>Experiments and Results</h2>
-            <p>
-                After training our model on the aforementioned train data, we conducted experiments on our validation data - which in our case was all pairs of (img, obj) in val2017 such that the actual count is greater than zero, and 5000 random zero samples,
-                just to check. We additionally evaluated CLIP zero-shot on the same dataset in the following way. For each image and each object we would make ten prompts of the form: "A photo of {i} {object}" being careful about where we use plural vs singular.
-                From these results, we see that our pipeline of CLIP + MLP is substanially better for lower counts (0,1,2,3,4) however performs the same or worse for bigger counts. We think this happens as there is not a lot of higher count labels in the train data, compared
-                to the lower counts, so our model does not have enough data to learn efficiently. Overall accuracy improves by 40%, which leads us to believe that if given enough images that contain a certain object, our model will be able to generalize and substanially improve
-                accuracy in predicting the count of that object.
-            </p>
-            <p>
-                We additionally wanted to test whether our model generalizes for objects - so will it be able to accurately count some object in an image where the object is not in the training data.
-                For this we used the Modified CountBench dataset. Recall, that this dataset was made by summarizing captions using ChatGPT-4 so it might be faulty, but we still include it, as the results are interesting.
-            </p>
-            
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    font-size: 14px;
-                }
-        
-                table.metrics-table {
-                    border-collapse: collapse;
-                    margin: 20px 0;
-                    width: 100%;
-                    max-width: 1000px;
-                    font-size: 13px;
-                }
-                .metrics-table thead th {
-                    background-color: #f7f7f7;
-                    font-weight: bold;
-                    text-align: center;
-                    border-bottom: 2px solid #ddd;
-                }
-                .metrics-table th, .metrics-table td {
-                    padding: 6px 8px;
-                    border: 1px solid #eee;
-                    text-align: center;
-                }
-                .metrics-table tbody tr:nth-child(even) {
-                    background-color: #fafafa;
-                }
-                .metrics-table tfoot td {
-                    font-weight: bold;
-                    background-color: #f7f7f7;
-                }
-                .metrics-table td:first-child {
-                    text-align: left;
-                    font-weight: bold;
-                }
-            </style>
-            
-            <table class="metrics-table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">Count</th>
-                        <th colspan="4">Model 1 (CLIP)</th>
-                        <th colspan="4">Model 2 (CLIP + MLP)</th>
-                    </tr>
-                    <tr>
-                        <th>Accuracy</th>
-                        <th>MMAE</th>
-                        <th>MAE</th>
-                        <th>RMSE</th>
-                        <th>Accuracy</th>
-                        <th>MMAE</th>
-                        <th>MAE</th>
-                        <th>RMSE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>0</td>
-                        <td>0.03</td>
-                        <td>3.23</td>
-                        <td>3.23</td>
-                        <td>3.36</td>
-                        <td>0.73</td>
-                        <td>0.39</td>
-                        <td>0.39</td>
-                        <td>0.79</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>0.22</td>
-                        <td>1.32</td>
-                        <td>2.64</td>
-                        <td>3.79</td>
-                        <td>0.59</td>
-                        <td>0.30</td>
-                        <td>0.59</td>
-                        <td>0.94</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>0.17</td>
-                        <td>0.86</td>
-                        <td>2.59</td>
-                        <td>3.44</td>
-                        <td>0.42</td>
-                        <td>0.25</td>
-                        <td>0.75</td>
-                        <td>1.01</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>0.13</td>
-                        <td>0.60</td>
-                        <td>2.41</td>
-                        <td>3.00</td>
-                        <td>0.27</td>
-                        <td>0.27</td>
-                        <td>1.07</td>
-                        <td>1.31</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>0.12</td>
-                        <td>0.52</td>
-                        <td>2.59</td>
-                        <td>3.01</td>
-                        <td>0.14</td>
-                        <td>0.31</td>
-                        <td>1.53</td>
-                        <td>1.83</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>0.06</td>
-                        <td>0.45</td>
-                        <td>2.72</td>
-                        <td>3.14</td>
-                        <td>0.06</td>
-                        <td>0.38</td>
-                        <td>2.29</td>
-                        <td>2.53</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>0.13</td>
-                        <td>0.43</td>
-                        <td>3.00</td>
-                        <td>3.69</td>
-                        <td>0.02</td>
-                        <td>0.44</td>
-                        <td>3.06</td>
-                        <td>3.29</td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td>0.11</td>
-                        <td>0.42</td>
-                        <td>3.36</td>
-                        <td>4.12</td>
-                        <td>0.01</td>
-                        <td>0.47</td>
-                        <td>3.77</td>
-                        <td>4.00</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>0.06</td>
-                        <td>0.45</td>
-                        <td>4.03</td>
-                        <td>4.86</td>
-                        <td>0.02</td>
-                        <td>0.52</td>
-                        <td>4.70</td>
-                        <td>4.99</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>0.07</td>
-                        <td>0.47</td>
-                        <td>4.70</td>
-                        <td>5.66</td>
-                        <td>0.01</td>
-                        <td>0.56</td>
-                        <td>5.63</td>
-                        <td>5.89</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td>Total</td>
-                        <td>0.14</td>
-                        <td>1.64</td>
-                        <td>2.84</td>
-                        <td>3.61</td>
-                        <td>0.53</td>
-                        <td>0.32</td>
-                        <td>0.83</td>
-                        <td>1.45</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-        
-        <!-- Discussion and Future Work Section -->
-        <section id="discussion">
-            <h2>Discussion and Future Work</h2>
-            <h3>Strengths:</h3>
-            <ul>
-                <li><strong>Improved Accuracy:</strong> The regression model shows substantial improvements in counting accuracy compared to zero-shot CLIP.</li>
-                <li><strong>Maintained Generalization:</strong> The enhanced model retains CLIP’s performance on general vision-language tasks, ensuring broad applicability.</li>
-                <li><strong>Scalability:</strong> The method can be extended to accommodate more object categories and larger counts with further data augmentation and model tuning.</li>
-            </ul>
-            <h3>Limitations:</h3>
-            <ul>
-                <li><strong>Data Imbalance:</strong> Despite balancing efforts, certain object counts remain underrepresented, potentially affecting model performance.</li>
-                <li><strong>Dependency on Object Detection:</strong> The initial object detection step may introduce errors if objects are not accurately detected.</li>
-                <li><strong>Scalability to Larger Counts:</strong> Extending the model to accurately count beyond ten objects remains a challenge due to data scarcity.</li>
-            </ul>
-            <h3>Future Directions:</h3>
-            <ul>
-                <li><strong>Enhanced Data Augmentation:</strong> Implement advanced data augmentation and synthetic data generation to balance and expand the dataset.</li>
-                <li><strong>Advanced Architectures:</strong> Explore transformer-based models and attention mechanisms to further improve counting accuracy.</li>
-                <li><strong>Fine-Tuning CLIP:</strong> Fine-tune the entire CLIP model, not just the regression head, to better integrate counting capabilities.</li>
-                <li><strong>Broader Evaluation:</strong> Test the model on more diverse and specialized counting datasets to validate its robustness.</li>
-                <li><strong>Interactive Interface:</strong> Develop an interactive web interface for real-time object counting predictions.</li>
-            </ul>
-        </section>
+            <!-- Conclusion Section -->
+            <section id="conclusion">
+                <h2>Conclusion</h2>
+                <p>
+                    In this project, we successfully enhanced CLIP's object counting capabilities by integrating its image and text embeddings into a robust MLP regressor. Our approach demonstrated significant improvements in counting accuracy, particularly for lower object counts, while maintaining generalization across diverse object categories. The implementation of residual connections and regularization techniques further bolstered the model's performance and stability. Future work will focus on addressing data imbalance, scaling to larger counts, and refining the model architecture to unlock even greater accuracy and versatility.
+                </p>
+            </section>
 
-        <!-- References Section -->
-        <section id="references">
-            <h2>References</h2>
-            <ol>
-                <li id="ref-clip">
-                    Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., ... Sutskever, I. (2021).
-                    "<em>Learning Transferable Visual Models From Natural Language Supervision</em>."
-                    In Proceedings of the International Conference on Machine Learning (ICML).
-                    <a href="https://arxiv.org/abs/2103.00020" target="_blank">arXiv:2103.00020</a>.
-                </li>
-                <li id="ref-paiss2023">
-                    Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. (2023).
-                    "<em>Teaching CLIP to Count to Ten</em>."
-                    <a href="https://arxiv.org/abs/2302.12066" target="_blank">arXiv:2302.12066</a>.
-                </li>
-                <li id="ref-2309-13097">
-                    Xu, J., Le, H., & Samaras, D. (2023).
-                    "<em>Zero-Shot Object Counting with Language-Vision Models</em>."
-                    <a href="https://arxiv.org/abs/2309.13097" target="_blank">arXiv:2309.13097</a>.
-                </li>
-                <li id="ref-lin2014">
-                    Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., & Zitnick, C. L. (2014).
-                    "<em>Microsoft COCO: Common Objects in Context</em>."
-                    In European Conference on Computer Vision (ECCV).
-                    <a href="https://arxiv.org/abs/1405.0312" target="_blank">arXiv:1405.0312</a>.
-                </li>
-                <!-- Add additional references here -->
-            </ol>
-        </section>
-    </main>
+            <!-- References Section -->
+            <section id="references">
+                <h2>References</h2>
+                <ol>
+                    <li id="ref-clip">
+                        Radford, A., Kim, J. W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., ... Sutskever, I. (2021).
+                        "<em>Learning Transferable Visual Models From Natural Language Supervision</em>."
+                        In Proceedings of the International Conference on Machine Learning (ICML).
+                        <a href="https://arxiv.org/abs/2103.00020" target="_blank">arXiv:2103.00020</a>.
+                    </li>
+                    <li id="ref-paiss2023">
+                        Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. (2023).
+                        "<em>Teaching CLIP to Count to Ten</em>."
+                        <a href="https://arxiv.org/abs/2302.12066" target="_blank">arXiv:2302.12066</a>.
+                    </li>
+                    <li id="ref-2309-13097">
+                        Xu, J., Le, H., & Samaras, D. (2023).
+                        "<em>Zero-Shot Object Counting with Language-Vision Models</em>."
+                        <a href="https://arxiv.org/abs/2309.13097" target="_blank">arXiv:2309.13097</a>.
+                    </li>
+                    <li id="ref-lin2014">
+                        Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., & Zitnick, C. L. (2014).
+                        "<em>Microsoft COCO: Common Objects in Context</em>."
+                        In European Conference on Computer Vision (ECCV).
+                        <a href="https://arxiv.org/abs/1405.0312" target="_blank">arXiv:1405.0312</a>.
+                    </li>
+                    <!-- Add additional references here -->
+                </ol>
+            </section>
+        </main>
+    </div>
 
     <footer>
         <p>&copy; 2024 Roni Paiss, Mateja Vukelic, Ariel Ephrat, Omer Tov, Shiran Zada, Inbar Mosseri, Michal Irani, & Tali Dekel</p>
     </footer>
 
+    <!-- External JavaScript for Interactive Features -->
     <script src="scripts/scripts.js"></script>
+
+    <!-- JavaScript for Sidebar Active Link Highlighting -->
+    <script>
+        // Highlight active section in sidebar
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('nav.sidebar ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 80;
+                if (pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
