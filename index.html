@@ -127,31 +127,22 @@
         </section>
 
         <!-- Data Collection Section -->
-        <!-- Data Collection Section -->
         <section id="data_collection">
             <h2>Data Collection</h2>
             <p>
-                For our data, we used the COCO 2017 train and validation set <sup><a href="#ref-paiss2023">[4]</a></sup>. COCO (Common Objects in Context) contains over 100,000 images of different objects in multiple settings. Objects range from everyday fruits to
-                more abstract nouns like person as well as other random nouns like umbrella and toilet. It has annotations, so we were able to get data of the form (image, object, count). We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects than COCO) after modifying it. Namely, the CountBench dataset has data of the form 
+                For our data, we used the COCO 2017 train and validation set <sup><a href="#ref-paiss2023">[4]</a></sup>. COCO (Common Objects in Context) contains over 100,000 images of different objects in multiple settings. Objects range from everyday fruits, to
+                more abstract nouns like person as well as other random nouns like umbrella and toilet. It has annotations, so we were able to get data of the form (image, object, count). We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects then COCO) after modifying it. Namely, CountBench dataset has data of the form 
                 (image, caption, number) - so an example is a picture of headsets, with the caption being "We review the ten best gaming headsets in the market" and the number being 10 as there are 10 headsets. However, as stated, our model has the input of an image and the word
-                description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT-4 to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
+                description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT 4o to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
                 faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
             </p>
             <h3>Data Subset Selection and Balancing Counts</h3>
             <p>
                 For training, we first thought of using every possible pair (image, object) where images are and objects are taken from train2017. However, as train2017 had 18GB of images, and there were 80 objects this was not viable. 
-                Additionally, with this approach, a large majority of labels would then be zero, which would bias our model to predict zero. Thus, we opted for taking every pair (image, object) where the object was in the image and additionally added a fixed amount of (random)
+                Additionally, with this approach, a large majority of lables would then be zero which would bias our model to predict zero. Thus we opted for taking every pair (image, object) where the object was in the image, and additionally added a fixed amount of (random)
                 datapoints where the count was zero. With this approach, there was still quite a bit of class imbalance, so after a bit of testing we rebalanced our training data, as to not bias our model.
             </p>
-            <div class="content">
-                <h3>Count Distributions Before and After Balancing</h3>
-                <img src="images/original_distribution.png" alt="Original Count Distribution" class="responsive-img">
-                <p class="caption">Figure 1: The original count distribution of object-image pairs in the COCO dataset, showing significant imbalance.</p>
-                <img src="images/balanced_distribution.png" alt="Balanced Count Distribution" class="responsive-img">
-                <p class="caption">Figure 2: The count distribution after balancing the dataset, resulting in a more uniform representation of object counts.</p>
-            </div>
         </section>
-
 
         <!-- Model Section -->
         <section id="model">
@@ -184,10 +175,11 @@
             <h2>Training and Evaluation Metrics</h2>
             <h3>RMSE, MAE, and MMAE Definitions</h3>
             <ul>
-                <li><strong>RMSE:</strong> Defined as <code>√(Σ(y_i - ŷ_i)^2 / N)</code>, where <code>y_i</code> is the ground-truth count and <code>ŷ_i</code> is the predicted count. RMSE heavily penalizes large errors and is sensitive to outliers. It is a common metric in regression tasks.</li>
-                <li><strong>MAE:</strong> Defined as <code>Σ|y_i - ŷ_i| / N</code>, MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
-                <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by <code>MMAE = Σ(|y_i - ŷ_i| / (y_i + 1)) / N</code>. MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
+                <li><strong>RMSE:</strong> Defined as \( \sqrt{\frac{\sum_{i=1}^{N} (y_i - \hat{y}_i)^2}{N}} \), where \( y_i \) is the ground-truth count and \( \hat{y}_i \) is the predicted count. RMSE heavily penalizes large errors and is sensitive to outliers. It is a common metric in regression tasks.</li>
+                <li><strong>MAE:</strong> Defined as \( \frac{\sum_{i=1}^{N} |y_i - \hat{y}_i|}{N} \), MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
+                <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by \( \text{MMAE} = \frac{\sum_{i=1}^{N} \frac{|y_i - \hat{y}_i|}{y_i + 1}}{N} \). MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
             </ul>
+            
             <h3>Why Train on MMAE?</h3>
             <p>
                 For most counting tasks, an off-by-one error when the true count is small (e.g., 1) is more critical than the same error when the count is large (e.g., 54). By training directly on MMAE, we emphasize the importance of precision at low object counts, encouraging the model to be more careful and accurate when counts are small while still performing well in denser scenarios.
