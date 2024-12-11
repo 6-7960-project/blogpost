@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta property="og:title" content="Teaching CLIP to Count: A Deep Learning Approach" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teaching CLIP to Count</title>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="shortcut icon" href="images/icon.ico">
+
+    <!-- Accessibility and SEO -->
+    <meta name="description" content="A deep learning approach to enhance CLIP's object counting capabilities using an enhanced MLP regressor.">
+    <meta name="keywords" content="CLIP, Object Counting, Deep Learning, Computer Vision, Machine Learning, COCO Dataset">
+
+    <!-- MathJax and Mermaid for Diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" id="MathJax-script" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+    <!-- Smooth Scrolling and Sidebar Highlighting -->
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Header Styling */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        .header-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 5px;
+        }
+        .header-container .authors p {
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        .header-container .authors a {
+            color: #cdeac0;
+            text-decoration: none;
+        }
+        .header-container .authors a:hover {
+            text-decoration: underline;
+        }
+        .header-container .course-info {
+            font-style: italic;
+            color: #ddd;
+            font-size: 1em;
+        }
+
+        /* Layout Styling */
+        .content-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* Sidebar Styling */
+        nav.sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+        }
+        nav.sidebar h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #4CAF50;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        nav.sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav.sidebar ul li {
+            margin: 10px 0;
+        }
+        nav.sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1em;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        nav.sidebar ul li a:hover,
+        nav.sidebar ul li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* Main Content Styling */
+        main {
+            flex: 1;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        main section {
+            margin-bottom: 40px;
+        }
+        main section h2 {
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        main section p {
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+        .responsive-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .caption {
+            font-size: 0.9em;
+            color: #555;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 0.9em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-wrapper {
+                flex-direction: column;
+            }
+            nav.sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            main {
+                padding: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Teaching CLIP to Count Objects</h1>
+            <div class="authors">
+                <p><a href="#">Margulan Ismoldayev</a></p>
+                <p><a href="#">Mateja Vukelic</a></p>
+            </div>
+            <p class="course-info">Final Project for 6.7960, MIT</p>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <h2>Outline</h2>
+            <ul>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#related_work">Related Work</a></li>
+                <li><a href="#data_collection">Data Collection</a></li>
+                <li><a href="#model">Model and Method</a></li>
+                <li><a href="#training_evaluation">Training and Evaluation Metrics</a></li>
+                <li><a href="#experiments">Experiments and Results</a></li>
+                <li><a href="#discussion">Discussion and Future Work</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+                <li><a href="#references">References</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Sections here -->
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Margulan Ismoldayev and Mateja Vukelic. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

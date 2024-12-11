@@ -1038,3 +1038,167 @@
     </script>
 </body>
 </html>
+styles.css/
+/* General Styles */
+body {
+    background-color: #f5f9ff;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #DDD;
+    padding: 20px;
+    text-align: center;
+}
+
+.header-container h1 {
+    font-size: 32px;
+    margin: 0;
+    color: #0e7862;
+}
+
+.authors p {
+    margin: 5px 0;
+    font-size: 17px;
+}
+
+.authors a {
+    color: #0e7862;
+    text-decoration: none;
+}
+
+.authors a:hover {
+    color: #24b597;
+}
+
+.course-info {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #555;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    width: 200px;
+    background-color: #fff;
+    border: 1px solid #DDD;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-top: 0;
+    color: #0e7862;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: #0e7862;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+    color: #24b597;
+}
+
+/* Main Content Styles */
+main {
+    margin-left: 240px; /* Width of sidebar + some spacing */
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 50px;
+}
+
+section img.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+.caption {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.text-content {
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 28px;
+    color: #0e7862;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 22px;
+    color: #0e7862;
+    margin-top: 20px;
+}
+
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+ol {
+    list-style-type: decimal;
+    margin-left: 20px;
+}
+
+p {
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+footer {
+    background-color: #fff;
+    border-top: 1px solid #DDD;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+    main {
+        margin-left: 20px;
+    }
+    header, footer {
+        padding: 15px;
+    }
+    h1, h2, h3 {
+        font-size: 24px;
+    }
+    .authors p, .course-info, .sidebar ul li a {
+        font-size: 16px;
+    }
+}
