@@ -102,12 +102,12 @@
                 however, all of the existing literature differs from our approach. We approach this problem as a regression task, and thus make our pipeline simpler, while still maintaing better accuracy over zero-shot.
             </p>
             <p>
-                <strong>Teaching CLIP to Count to Ten</strong> <sup><a href="#ref-paiss2023">[1]</a></sup> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
+                <strong>Teaching CLIP to Count to Ten</strong> <sup><a href="#ref-paiss2023">[2]</a></sup> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
                 They propose a counting-contrastive loss to finetune a pre-trained VLM, enabling it to distinguish between correct and counterfactual object counts in image-text pairs. 
                 Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
             </p>
             <p>
-                <strong>Zero-Shot Object Counting with Language-Vision Models</strong> <sup><a href="#ref-2309-13097">[1]</a></sup> This paper introduces Zero-Shot Object Counting (ZSC), a new setting where only a class name is known at test time, 
+                <strong>Zero-Shot Object Counting with Language-Vision Models</strong> <sup><a href="#ref-2309-13097">[3]</a></sup> This paper introduces Zero-Shot Object Counting (ZSC), a new setting where only a class name is known at test time, 
                 eliminating the need for human-selected exemplars. Instead, the method automatically extracts exemplar patches from the input image itself. Using large vision-language models like CLIP and Stable Diffusion, 
                 it identifies and selects patches that represent the target object class. A ranking model then picks the patches that minimize counting errors. 
                 Experiments on the FSC-147 dataset demonstrate that this approach effectively counts objects without relying on manual annotations.
