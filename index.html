@@ -202,50 +202,170 @@
 
         <!-- Experiments and Results Section -->
         <section id="experiments">
-            <h2>Experiments and Results</h2>
-            <h3>Training Setup</h3>
-            <p>
-                We trained the regression model using the balanced COCO dataset, with the following configurations:
-            </p>
-            <ul>
-                <li><strong>Batch Size:</strong> 64</li>
-                <li><strong>Learning Rate:</strong> 1e-4</li>
-                <li><strong>Optimizer:</strong> Adam</li>
-                <li><strong>Loss Function:</strong> Mean Absolute Error (MAE)</li>
-                <li><strong>Early Stopping:</strong> Patience of 10 epochs</li>
-            </ul>
-            <h3>Quantitative Results</h3>
-            <p>
-                The trained model achieved a significant improvement in object counting accuracy compared to the zero-shot CLIP baseline. Specifically:
-            </p>
-            <ul>
-                <li><strong>MLP Regression Model:</strong> Achieved an MAE of 1.85 and RMSE of 2.85 on the validation set.</li>
-                <li><strong>Zero-Shot CLIP:</strong> Achieved an MAE of 2.10 and RMSE of 3.20 on the same set.</li>
-            </ul>
-            <p>
-                <strong>Figure 2:</strong> Training and Validation Loss Curves for the MLP Regression Model.
-            </p>
-            <em>Add Figure Here: Training and Validation Loss Curves</em>
-            <p>
-                <strong>Figure 3:</strong> Scatter Plot of Predicted vs Actual Object Counts.
-            </p>
-            <em>Add Figure Here: Scatter Plot of Predicted vs Actual Counts</em>
-            <h3>Comparative Analysis</h3>
-            <p>
-                Our model consistently outperformed the zero-shot CLIP baseline across various object categories and counts. The improvement was particularly notable for higher object counts where zero-shot CLIP struggled to maintain accuracy.
-            </p>
-            <p>
-                <strong>Figure 4:</strong> Confusion Matrix Comparing MLP Regression Model and Zero-Shot CLIP on CountBench.
-            </p>
-            <em>Add Figure Here: Confusion Matrix</em>
-            <h3>Qualitative Results</h3>
-            <p>
-                Visual inspection of the model’s predictions revealed that it accurately counts objects in diverse scenes, maintaining high precision even in cluttered or complex backgrounds.
-            </p>
-            <p>
-                <strong>Figure 5:</strong> Sample Images with Predicted Object Counts by the MLP Regression Model.
-            </p>
-            <em>Add Figure Here: Sample Predictions</em>
+            <table border="1" cellspacing="0" cellpadding="5">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Count</th>
+                        <th colspan="4">Model 1 (CLIP)</th>
+                        <th colspan="4">Model 2 (CLIP + MLP)</th>
+                    </tr>
+                    <tr>
+                        <th>Accuracy</th>
+                        <th>MMAE</th>
+                        <th>MAE</th>
+                        <th>RMSE</th>
+                        <th>Accuracy</th>
+                        <th>MMAE</th>
+                        <th>MAE</th>
+                        <th>RMSE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Total Row -->
+                    <tr>
+                        <td>Total</td>
+                        <td>0.1449519991560291</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>0.5329676126173647</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    
+                    <!-- Count = 0 -->
+                    <tr>
+                        <td>0</td>
+                        <td>0.025</td>
+                        <td>3.2308</td>
+                        <td>3.2308</td>
+                        <td>3.3600595232822883</td>
+                        <td>0.7334</td>
+                        <td>0.388544548592536</td>
+                        <td>0.388544548592536</td>
+                        <td>0.7880891385616269</td>
+                    </tr>
+                    
+                    <!-- Count = 1 -->
+                    <tr>
+                        <td>1</td>
+                        <td>0.22192325690219936</td>
+                        <td>1.320367337388863</td>
+                        <td>2.640734674777726</td>
+                        <td>3.7869224271629274</td>
+                        <td>0.5865699578848853</td>
+                        <td>0.2962153362007863</td>
+                        <td>0.5924306724015725</td>
+                        <td>0.9400604393325265</td>
+                    </tr>
+                    
+                    <!-- Count = 2 -->
+                    <tr>
+                        <td>2</td>
+                        <td>0.16632443531827515</td>
+                        <td>0.8624229979466145</td>
+                        <td>2.5872689938398357</td>
+                        <td>3.4372043460685378</td>
+                        <td>0.4160164271047228</td>
+                        <td>0.25081174238240717</td>
+                        <td>0.7524352271472213</td>
+                        <td>1.0056966490967865</td>
+                    </tr>
+                    
+                    <!-- Count = 3 -->
+                    <tr>
+                        <td>3</td>
+                        <td>0.12605042016806722</td>
+                        <td>0.6031746031746031</td>
+                        <td>2.4126984126984126</td>
+                        <td>2.9957953728461475</td>
+                        <td>0.26517273576097106</td>
+                        <td>0.2673663746401012</td>
+                        <td>1.0694654985604048</td>
+                        <td>1.3053398887886356</td>
+                    </tr>
+                    
+                    <!-- Count = 4 -->
+                    <tr>
+                        <td>4</td>
+                        <td>0.12271973466003316</td>
+                        <td>0.5170812603648436</td>
+                        <td>2.585406301824212</td>
+                        <td>3.0143383169811186</td>
+                        <td>0.14262023217247097</td>
+                        <td>0.3059028140638353</td>
+                        <td>1.5295140703191754</td>
+                        <td>1.826226019805905</td>
+                    </tr>
+                    
+                    <!-- Count = 5 -->
+                    <tr>
+                        <td>5</td>
+                        <td>0.06426735218508997</td>
+                        <td>0.4528706083976008</td>
+                        <td>2.717223650385604</td>
+                        <td>3.1406612700779446</td>
+                        <td>0.061696658097686374</td>
+                        <td>0.38143253563745655</td>
+                        <td>2.2885952138247396</td>
+                        <td>2.5333020463913596</td>
+                    </tr>
+                    
+                    <!-- Count = 6 -->
+                    <tr>
+                        <td>6</td>
+                        <td>0.12903225806451613</td>
+                        <td>0.42811059907834076</td>
+                        <td>2.996774193548387</td>
+                        <td>3.69000393390821</td>
+                        <td>0.02258064516129032</td>
+                        <td>0.4377193048944018</td>
+                        <td>3.064035134260813</td>
+                        <td>3.2933126861292763</td>
+                    </tr>
+                    
+                    <!-- Count = 7 -->
+                    <tr>
+                        <td>7</td>
+                        <td>0.10837438423645321</td>
+                        <td>0.41995073891625617</td>
+                        <td>3.3596059113300494</td>
+                        <td>4.117725710222882</td>
+                        <td>0.009852216748768473</td>
+                        <td>0.47135969798723704</td>
+                        <td>3.7708775838978963</td>
+                        <td>3.997419978392604</td>
+                    </tr>
+                    
+                    <!-- Count = 8 -->
+                    <tr>
+                        <td>8</td>
+                        <td>0.06153846153846154</td>
+                        <td>0.4478632478632477</td>
+                        <td>4.030769230769231</td>
+                        <td>4.8611489620016</td>
+                        <td>0.015384615384615385</td>
+                        <td>0.5218616065731408</td>
+                        <td>4.696754459158266</td>
+                        <td>4.989637112776434</td>
+                    </tr>
+                    
+                    <!-- Count = 9 -->
+                    <tr>
+                        <td>9</td>
+                        <td>0.07482993197278912</td>
+                        <td>0.4700680272108839</td>
+                        <td>4.700680272108843</td>
+                        <td>5.659859857403024</td>
+                        <td>0.013605442176870748</td>
+                        <td>0.5629874338352736</td>
+                        <td>5.6298743383527325</td>
+                        <td>5.892036524085755</td>
+                    </tr>
+                </tbody>
+            </table>
+            
         </section>
 
         <!-- Discussion and Future Work Section -->
