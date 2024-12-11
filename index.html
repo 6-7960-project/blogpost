@@ -41,7 +41,14 @@
             <div class="text-content">
                 <h2>Abstract</h2>
                 <p>
-                    Counting the number of objects of a given type in an image is a challenging computer vision task with numerous real-world applications. In this work, we build upon the Contrastive Language-Image Pre-training (CLIP) model to tackle counting in a simple manner. We leverage CLIP's image and text embeddings to form a rich semantic feature representation and train a Multi-Layer Perceptron (MLP) regressor to directly predict the count. Unlike prior methods that rely on generating heat maps or densities, our approach focuses on extracting meaningful embeddings and performing counting in the latent space. Our experiments, conducted on the COCO dataset, demonstrate that this strategy can achieve competitive results. We implement and evaluate metrics such as Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and a Modified MAE (MMAE) that better captures the severity of off-by-one errors. By introducing skip connections and regularization techniques in the MLP, we improve generalization and stability. Our findings suggest that leveraging a large-scale vision-language model like CLIP for counting tasks can simplify the pipeline and enable more scalable, adaptable solutions to object counting challenges.
+                    Counting the number of objects of a given type in an image is a challenging computer vision task with numerous real-world applications. 
+                    In this work, we build upon the Contrastive Language-Image Pre-training (CLIP) model to tackle counting in a simple manner. 
+                    We leverage CLIP's image and text embeddings to form a rich semantic feature representation and train a Multi-Layer Perceptron (MLP) regressor to directly predict the count. 
+                    Unlike prior methods that rely on generating heat maps or densities, our approach focuses on extracting meaningful embeddings and performing counting in the latent space. 
+                    Our experiments, conducted on the COCO dataset, demonstrate that this strategy can achieve competitive results and can generalize for images, given that the objects that are being counted are in the training data. 
+                    We additionally conducted tests on the CountBench dataset (which vastly different objects than COCO) and noticed that our model had poor accuracy, but decent MMAE loss.
+                    We implement and evaluate metrics such as Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and a Modified MAE (MMAE) that better captures the severity of off-by-one errors. By introducing skip connections and regularization techniques in the MLP, 
+                    we improve generalization and stability. Our findings suggest that leveraging a large-scale vision-language model like CLIP for counting tasks can simplify the pipeline and enable more scalable, adaptable solutions to object counting challenges.
                 </p>
             </div>
         </section>
@@ -95,7 +102,7 @@
                 however, all of the existing literature differs from our approach. We approach this problem as a regression task, and thus make our pipeline simpler, while still maintaing better accuracy over zero-shot.
             </p>
             <p>
-                <strong>Teaching CLIP to Count to Ten</strong> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
+                <strong>Teaching CLIP to Count to Ten</strong> <sup><a href="#ref-paiss2023">[1]</a></sup> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
                 They propose a counting-contrastive loss to finetune a pre-trained VLM, enabling it to distinguish between correct and counterfactual object counts in image-text pairs. 
                 Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
             </p>
@@ -276,6 +283,12 @@
             <ol>
                 <li id="ref-clip">Radford, A., et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).</li>
                  <!-- Other references here -->
+                <li id="ref-paiss2023">
+                    Paiss, Roni, Ariel Ephrat, Omer Tov, Shiran Zada, Inbar Mosseri, Michal Irani, & Tali Dekel (2023). 
+                    "<em>Teaching CLIP to Count to Ten</em>." 
+                    <a href="https://arxiv.org/abs/2302.12066" target="_blank">arXiv:2302.12066</a>.
+                </li>
+
                 <li>Lin, T.-Y., et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).</li>
                 <li>Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. "Teaching CLIP to Count to Ten." arXiv preprint arXiv:2302.12066 (2023).</li>
                 <li>He, K., Zhang, X., Ren, S., & Sun, J. "Deep Residual Learning for Image Recognition." CVPR (2016).</li>
