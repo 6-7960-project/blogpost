@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" id="MathJax-script" async></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
 
 <html lang="en">
 <head>
@@ -155,22 +159,37 @@
                     <li>BatchNorm and Droput were used as to combat overfitting, as our model overfit on train very fast.</li>
                 </ul>
             </p>
-            <h3>Enhanced MLP Regressor Architecture</h3>
-            <p>
-                The MLP architecture is defined as follows:
-            </p>
-            <em>Add Figure Here: Architecture of the Enhanced MLP Regressor</em>
-            <p>
-                <strong>Figure 1:</strong> Architecture of the Enhanced MLP Regressor. Skip connections, Batch Normalization, and Dropout are used for stable and robust training.
-            </p>
-            <h3>Why Residual Connections?</h3>
-            <p>
-                Counting is a challenging problem due to the complexity of image scenes and the variability in object appearances. Residual connections, originally introduced in ResNet architectures, allow layers to learn transformations on top of the identity mapping. This can lead to easier training, as the network can fallback to just passing forward the original input if adding transformations makes the loss worse. In our case, adding a skip connection from the input to a deeper layer helps ensure that the model can directly use the raw embedding features if needed.
-            </p>
-            <h3>Why Dropout and Batch Normalization?</h3>
-            <p>
-                Regularization is key to preventing overfitting when training neural networks. Batch Normalization normalizes the inputs to each layer, stabilizing training and allowing the use of higher learning rates. Dropout randomly drops units during training, forcing the network to learn redundant representations and preventing it from relying too heavily on specific neurons. This is especially important for a counting model that must generalize beyond the training distribution.
-            </p>
+            <div class="mermaid">
+                flowchart TD
+                
+                    X[Input (x, dimension: input_dim)] --> FC1[Linear(input_dim -> 2048)]
+                    FC1 --> BN1[BatchNorm(2048)]
+                    BN1 --> ReLU1[ReLU]
+                    ReLU1 --> D1[Dropout(0.3)]
+                    D1 --> FC2[Linear(2048 -> 2048)]
+                    FC2 --> BN2[BatchNorm(2048)]
+                    BN2 --> ReLU2[ReLU]
+                    ReLU2 --> D2[Dropout(0.3)]
+                
+                    X --> Skip[Skip: Linear(input_dim -> 2048)]
+                    D2 -->|Add residual| Add[Add Residual with Skip]
+                    Skip --> Add
+                
+                    Add --> FC3[Linear(2048 -> 1024)]
+                    FC3 --> BN3[BatchNorm(1024)]
+                    BN3 --> ReLU3[ReLU]
+                    ReLU3 --> D3[Dropout(0.3)]
+                    D3 --> FC4[Linear(1024 -> 512)]
+                    FC4 --> BN4[BatchNorm(512)]
+                    BN4 --> ReLU4[ReLU]
+                    ReLU4 --> D4[Dropout(0.3)]
+                    D4 --> FC5[Linear(512 -> 1)]
+                    FC5 --> Output[Output]
+            </div>
+
+
+
+
         </section>
 
         <!-- Training and Evaluation Metrics Section -->
