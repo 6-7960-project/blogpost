@@ -136,10 +136,10 @@
                 description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT-4 to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
                 faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
             </p>
-            <h3>Example COCO Dataset Visualization</h3>
+            <h3>Example Visualization: Counting Multiple Objects</h3>
             <div class="content">
-                <img src="images/coco_example.png" alt="Example from COCO Dataset" class="responsive-img">
-                <p class="caption">Figure 1: An example image from the COCO dataset with bounding box annotations for multiple objects. This image showcases the dataset's richness and complexity.</p>
+                <img src="images/coco_masking_demo.gif" alt="COCO Dataset GIF Showing Object Counts" class="responsive-img">
+                <p class="caption">Figure 1: A GIF demonstrating how different objects in a COCO image are counted by masking them. Each frame highlights a specific object type, and we count the number of objects of that specific type.</p>
             </div>
             <h3>Data Subset Selection and Balancing Counts</h3>
             <p>
@@ -155,6 +155,7 @@
                 <p class="caption">Figure 3: The count distribution after balancing the dataset, resulting in a more uniform representation of object counts.</p>
             </div>
         </section>
+
 
 
         <!-- Model Section -->
