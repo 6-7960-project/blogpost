@@ -119,17 +119,12 @@
         <section id="data_collection">
             <h2>Data Collection</h2>
             <p>
-                We employ the Microsoft COCO (Common Objects in Context) dataset, a well-known large-scale dataset in computer vision. COCO consists of over 200,000 images, with annotations for 80 different object categories. Each image includes multiple objects in a scene, reflecting natural and realistic environments. These categories range from everyday objects like chairs, tables, and cars to more specific items such as kites, refrigerators, and umbrellas.
+                For our data, we used the COCO 2017 train and validation set <sup><a href="#ref-paiss2023">[4]</a></sup>. COCO (Common Objects in Context) contains over 100,000 images of different objects in multiple settings. Objects range from everyday fruits, to
+                more abstract nouns like person as well as other random nouns like umbrella and toilet. We additionally tested our model on the CountBench dataset <sup><a href="#ref-paiss2023">[2]</a></sup> (which has completely different objects then COCO) after modifying it. Namely, CountBench dataset has data of the form 
+                (image, caption, number) - so an example is a picture of headsets, with the caption being "We review the ten best gaming headsets in the market" and the number being 10 as there are 10 headsets. However, as stated, our model has the input of an image and the word
+                description of an object, which is different than the caption. Thus for this, we modified the CountBench dataset, by using the OpenAI API and prompting ChatGPT 4o to summarize each caption to its most relevant word - because of this, we note that this dataset might be 
+                faulty, and thus did not use it as the official validation dataset, but rather the val2017 from COCO.
             </p>
-            <h3>Why the COCO Dataset?</h3>
-            <p>
-                COCO is widely used as a benchmark for detection, segmentation, and captioning tasks, making it a standard reference point for research. By using COCO, we ensure:
-            </p>
-            <ul>
-                <li><strong>Diversity:</strong> The dataset includes scenes captured in varying lighting conditions, geographical locations, and containing multiple object types.</li>
-                <li><strong>Complexity:</strong> Objects often overlap or are partially occluded, pushing the counting model to rely on high-level semantic understanding rather than simple heuristics.</li>
-                <li><strong>Benchmarking:</strong> Results on COCO are easily comparable with previous works, allowing us to evaluate our improvements against well-established baselines.</li>
-            </ul>
             <h3>Data Subset Selection and Balancing Counts</h3>
             <p>
                 For training and validation, we use the <code>trainval2017</code> split of COCO, which contains over 118,000 images. Each image may contain multiple instances of various object classes. To create our training and validation sets, we:
@@ -294,11 +289,12 @@
                     "<em>Zero-Shot Object Counting with Language-Vision Models</em>."
                     <a href="https://arxiv.org/abs/2309.13097" target="_blank">arXiv:2309.13097</a>.
                 </li>
-                <li>Lin, T.-Y., et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).</li>
-                <li>Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. "Teaching CLIP to Count to Ten." arXiv preprint arXiv:2302.12066 (2023).</li>
-                <li>He, K., Zhang, X., Ren, S., & Sun, J. "Deep Residual Learning for Image Recognition." CVPR (2016).</li>
-                <li>Ioffe, S., & Szegedy, C. "Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift." ICML (2015).</li>
-                <li>Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., & Salakhutdinov, R. "Dropout: A Simple Way to Prevent Neural Networks from Overfitting." JMLR (2014).</li>
+                <li id="ref-lin2014">
+                    Lin, T.-Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., & Zitnick, C. L. (2014).
+                    "<em>Microsoft COCO: Common Objects in Context</em>."
+                    In European Conference on Computer Vision (ECCV).
+                    <a href="https://arxiv.org/abs/1405.0312" target="_blank">arXiv:1405.0312</a>.
+                </li>
                 <!-- Add additional references here -->
             </ol>
         </section>
