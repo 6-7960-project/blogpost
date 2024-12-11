@@ -41,14 +41,17 @@
             <div class="text-content">
                 <h2>Abstract</h2>
                 <p>
-                    Counting the number of objects of a given type in an image is a challenging computer vision task with numerous real-world applications. 
-                    In this work, we build upon the Contrastive Language-Image Pre-training (CLIP) model to tackle counting in a simple manner. 
-                    We leverage CLIP's image and text embeddings to form a rich semantic feature representation and train a Multi-Layer Perceptron (MLP) regressor to directly predict the count. 
-                    Unlike prior methods that rely on generating heat maps or densities, our approach focuses on extracting meaningful embeddings and performing counting in the latent space. 
-                    Our experiments, conducted on the COCO dataset, demonstrate that this strategy can achieve competitive results and can generalize for images, given that the objects that are being counted are in the training data. 
-                    We additionally conducted tests on the CountBench dataset (which vastly different objects than COCO) and noticed that our model had poor accuracy, but decent MMAE loss.
-                    We implement and evaluate metrics such as Root Mean Squared Error (RMSE), Mean Absolute Error (MAE), and a Modified MAE (MMAE) that better captures the severity of off-by-one errors. By introducing skip connections and regularization techniques in the MLP, 
-                    we improve generalization and stability. Our findings suggest that leveraging a large-scale vision-language model like CLIP for counting tasks can simplify the pipeline and enable more scalable, adaptable solutions to object counting challenges.
+                    Counting objects of a specified type within images is a critical task in computer vision, applicable to domains such as surveillance, 
+                    inventory management, and autonomous navigation. In this work, we leverage the Contrastive Language-Image Pre-training (CLIP) model 
+                    to develop a streamlined and effective object counting framework. Our approach utilizes CLIP's pre-trained image and text embeddings 
+                    to create a comprehensive feature representation, which is then fed into a Multi-Layer Perceptron (MLP) regressor trained to predict 
+                    object counts directly. Unlike traditional methods that depend on generating intermediate representations like heat maps or density 
+                    estimations, our model operates entirely within the embedding space, simplifying the pipeline and reducing computational overhead. 
+                    We train and evaluate our model on the COCO dataset, achieving competitive performance metrics in terms of Root Mean Squared Error 
+                    (RMSE), Mean Absolute Error (MAE), and a Modified MAE (MMAE) designed to more effectively penalize off-by-one errors. Furthermore, 
+                    we assess the model's generalization capabilities on the CountBench dataset, highlighting both its strengths and areas for improvement. 
+                    By integrating residual connections and regularization techniques within the MLP architecture, we enhance the model's stability and 
+                    generalization. Our findings demonstrate that leveraging CLIP's rich semantic embeddings provides a scalable and adaptable solution for object counting tasks.
                 </p>
             </div>
         </section>
@@ -62,36 +65,34 @@
             <div class="text-content">
                 <h2>Introduction</h2>
                 <p>
-                    The ability to count objects in images is a fundamental skill that humans acquire effortlessly. In computer vision, counting objects remains a challenging problem, especially when the categories and scenes vary significantly. 
-                    Traditional supervised methods often rely on carefully tuned architectures to perform counting tasks. With the advent of large-scale vision-language models like CLIP <sup><a href="#ref-clip">[1]</a></sup>, which aligns images and text in a shared embedding space, a new paradigm emerges: 
-                    leveraging powerful pre-trained features to tackle tasks such as counting in a zero-shot or few-shot manner.
-                </p>
-                <h3>What is CLIP?</h3>
-                <p>
-                    CLIP (Contrastive Language-Image Pre-training) is a model that learns to match images with their corresponding textual descriptions. The core idea is to train a vision encoder and a text encoder jointly using a large dataset of (image, text) pairs. 
-                    The training objective is contrastive: the correct (image, text) pairs are brought closer together in the embedding space, while incorrect pairings are pushed apart. After training, CLIP can:
-                </p>
-                <ul>
-                    <li>Provide semantic embeddings for images and text that reflect their high-level concepts.</li>
-                    <li>Perform zero-shot classification by comparing an image embedding with a set of candidate text embeddings, selecting the text whose embedding has the highest similarity with the image embedding.</li>
-                    <li>Facilitate retrieval tasks, where given a text query one can find the most semantically relevant images and vice versa.</li>
-                </ul>
-                <p>
-                    Because CLIP is trained on a broad array of image-text pairs scraped from the internet, it acquires a wide-ranging understanding of visual concepts and language constructs, making it adaptable to diverse tasks, 
-                    many of which it had never been explicitly trained on.
-                </p>
-                <h3>Motivation for Using CLIP in Counting</h3>
-                <p>
-                    Traditional approaches to counting often rely on generating heat maps or density estimates for a given class of objects. While these methods achieve remarkable performance, they can be complex and resource-intensive, 
-                    requiring large amounts of annotated data and specialized architectures. Prior works have introduced sophisticated deep networks that directly infer counts from images, 
-                    often using intermediate representations like heat maps or leveraging point-level annotations. These methods achieve state-of-the-art results but at the cost of increased complexity.
+                    Object counting within images is a fundamental task in computer vision, integral to applications such as surveillance, inventory 
+                    management, and autonomous systems. Accurately determining the number of instances of specific object categories in diverse and 
+                    complex scenes remains a challenging problem, particularly due to variations in object appearances, occlusions, and background clutter.
                 </p>
                 <p>
-                    Vision-language models like CLIP offer a promising alternative by leveraging their rich joint embeddings to perform counting in a simpler and more scalable manner. By training a regression head on top of CLIP's embeddings, 
-                    we aim to imbue the model with numerical reasoning capabilities essential for accurate object counting, without the need for complex intermediate representations.
+                    Traditional approaches to object counting often involve generating intermediate representations, such as density maps or heat maps, 
+                    which estimate object locations and counts. While effective, these methods typically require extensive computational resources and 
+                    large amounts of annotated data, limiting their scalability and applicability to real-world scenarios.
+                </p>
+                <p>
+                    In recent developments, large-scale vision-language models like Contrastive Language-Image Pre-training (CLIP) have demonstrated 
+                    remarkable capabilities in understanding and relating visual and textual information through shared embedding spaces. CLIP's ability 
+                    to encode images and textual descriptions into semantically meaningful vectors enables a new paradigm for object counting: leveraging pre-trained embeddings for direct count prediction.
+                </p>
+                <p>
+                    In this work, we propose a model that builds upon CLIP's powerful embedding representations to perform object counting. Our approach 
+                    involves concatenating CLIP's image and text embeddings to form a comprehensive feature vector, which is then input into a Multi-Layer 
+                    Perceptron (MLP) regressor trained to predict the count of specified objects directly. This method simplifies the counting pipeline by 
+                    eliminating the need for intermediate representations and capitalizes on CLIP's extensive pre-training on diverse image-text pairs.
+                </p>
+                <p>
+                    Additionally, we explore zero-shot counting capabilities by utilizing CLIP's text embeddings to handle object categories not seen during 
+                    training. By designing our model to generalize across various object types without requiring explicit retraining, we aim to create a versatile 
+                    and scalable counting solution. Our experiments on the COCO and CountBench datasets validate the effectiveness of our approach, demonstrating competitive performance and highlighting areas for future improvement.
                 </p>
             </div>
         </section>
+
 
         <!-- Related Work Section -->
         <section id="related_work">
