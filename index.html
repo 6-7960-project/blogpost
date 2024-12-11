@@ -220,45 +220,54 @@
                     font-size: 14px;
                 }
         
+                /* General table styling */
                 table.metrics-table {
                     border-collapse: collapse;
-                    margin: 20px 0;
+                    margin: 40px 0; /* Increased margin for more space around tables */
                     width: 100%;
                     max-width: 1000px;
                     font-size: 13px;
                 }
+        
+                table.metrics-table caption {
+                    caption-side: top;
+                    font-weight: bold;
+                    font-size: 16px;
+                    margin-bottom: 15px; /* More space below the caption */
+                }
+        
                 .metrics-table thead th {
-                    background-color: #f7f7f7;
+                    background-color: #e0f0fa; /* Light bluish background */
                     font-weight: bold;
                     text-align: center;
-                    border-bottom: 2px solid #ddd;
+                    border-bottom: 2px solid #aaa;
                 }
+        
                 .metrics-table th, .metrics-table td {
                     padding: 6px 8px;
                     border: 1px solid #eee;
                     text-align: center;
                 }
+        
                 .metrics-table tbody tr:nth-child(even) {
-                    background-color: #fafafa;
+                    background-color: #f9f9f9;
                 }
+        
                 .metrics-table tfoot td {
                     font-weight: bold;
-                    background-color: #f7f7f7;
+                    background-color: #e0f0fa;
                 }
+        
                 .metrics-table td:first-child {
                     text-align: left;
                     font-weight: bold;
-                }
-                .table-title {
-                    font-weight: bold;
-                    margin-top: 30px;
-                    margin-bottom: 10px;
+                    background-color: #f7faff;
                 }
             </style>
         
             <!-- First Table: val2017 COCO -->
-            <div class="table-title">val2017 COCO</div>
             <table class="metrics-table">
+                <caption>val2017 COCO</caption>
                 <thead>
                     <tr>
                         <th rowspan="2">Count</th>
@@ -405,8 +414,8 @@
         
         
             <!-- Second Table: ModifiedCountBench -->
-            <div class="table-title">ModifiedCountBench</div>
             <table class="metrics-table">
+                <caption>ModifiedCountBench</caption>
                 <thead>
                     <tr>
                         <th rowspan="2">Count</th>
@@ -482,14 +491,14 @@
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td>0.13</td>
+                        <td>0.15</td>
                         <td>0.20</td>
-                        <td>1.64</td>
-                        <td>1.92</td>
+                        <td>1.60</td>
+                        <td>1.90</td>
                         <td>0.06</td>
-                        <td>0.49</td>
-                        <td>3.93</td>
-                        <td>4.30</td>
+                        <td>0.48</td>
+                        <td>3.87</td>
+                        <td>4.26</td>
                     </tr>
                     <tr>
                         <td>8</td>
@@ -528,18 +537,21 @@
                 <tfoot>
                     <tr>
                         <td>Total</td>
+                        <!-- CLIP total: Accuracy 0.2295 ~ 0.23, MMAE 0.31, MAE 1.78, RMSE 2.44 -->
                         <td>0.23</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
+                        <td>0.31</td>
+                        <td>1.78</td>
+                        <td>2.44</td>
+                        <!-- CLIP+MLP total: Accuracy 0.1227 ~0.12, MMAE 0.42, MAE 3.22, RMSE 3.98 -->
                         <td>0.12</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
+                        <td>0.42</td>
+                        <td>3.22</td>
+                        <td>3.98</td>
                     </tr>
                 </tfoot>
             </table>
         </section>
+        
         
         
         <!-- Discussion and Future Work Section -->
