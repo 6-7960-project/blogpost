@@ -143,9 +143,9 @@
                 Our model starts from the CLIP embeddings of the input image and the textual query. Given an input image and a corresponding query (e.g., "red cars"), we:
             </p>
             <ol>
-                <p>Use the CLIP image encoder to obtain an image embedding \( I \in \mathbb{R}^d \).</p>
-                <p>Use the CLIP text encoder to obtain a text embedding \( T \in \mathbb{R}^d \).</p>
-                <p>Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</p>
+                <li> <span>Use the CLIP image encoder to obtain an image embedding \( I \in \mathbb{R}^d \).</span> </li>
+                <li> <span>Use the CLIP text encoder to obtain a text embedding \( T \in \mathbb{R}^d \).</span> </li>
+                <li> <span>Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</span> </li>
             </ol>
             <p>
                 We feed <span>X</span> into a customized Multi-Layer Perceptron (MLP) regressor. Our MLP uses five fully connected linear layers, including a skip connection inbetween them as well as batch normalization and drop out. After extensive testing, we
