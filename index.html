@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" id="MathJax-script" async></script>
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-  mermaid.initialize({ startOnLoad: true });
-</script>
+
 
 <html lang="en">
 <head>
@@ -13,6 +9,14 @@
     <title>Teaching CLIP to Count</title>
     <link rel="stylesheet" href="styles/styles.css">
     <link rel="shortcut icon" href="images/icon.ico">
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" id="MathJax-script" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+
+
 </head>
 <body>
     <header>
@@ -160,8 +164,8 @@
                 </ul>
             </p>
             <div class="mermaid">
-                flowchart TD
-                
+                graph TD
+            
                     X[Input (x, dimension: input_dim)] --> FC1[Linear(input_dim -> 2048)]
                     FC1 --> BN1[BatchNorm(2048)]
                     BN1 --> ReLU1[ReLU]
@@ -170,11 +174,11 @@
                     FC2 --> BN2[BatchNorm(2048)]
                     BN2 --> ReLU2[ReLU]
                     ReLU2 --> D2[Dropout(0.3)]
-                
+                    
                     X --> Skip[Skip: Linear(input_dim -> 2048)]
-                    D2 -->|Add residual| Add[Add Residual with Skip]
+                    D2 -->|Add residual|Add[Add Residual with Skip]
                     Skip --> Add
-                
+            
                     Add --> FC3[Linear(2048 -> 1024)]
                     FC3 --> BN3[BatchNorm(1024)]
                     BN3 --> ReLU3[ReLU]
