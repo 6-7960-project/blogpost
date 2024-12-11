@@ -148,7 +148,12 @@
                 <p>Concatenate these embeddings \( X = [I; T] \in \mathbb{R}^{2d} \).</p>
             </ol>
             <p>
-                We feed <code>X</code> into a customized Multi-Layer Perceptron (MLP) regressor. Our architecture leverages skip connections (residual connections), Batch Normalization, and Dropout. Skip connections help the network learn more effectively by providing direct pathways that mitigate gradient vanishing and exploding issues. Batch Normalization stabilizes learning, and Dropout regularizes the model to combat overfitting, improving generalization.
+                We feed <p>X</p> into a customized Multi-Layer Perceptron (MLP) regressor. Our MLP uses five fully connected linear layers, including a skip connection inbetween them as well as batch normalization and drop out. After extensive testing, we
+                arrived at this architecture - noting the following.
+                <ul>
+                    <li>Skip connection greatly improved our val accuracy noteably because we are doing a counting problem, so intuitively it makes sense as the model needs some form of "memory".</li>
+                    <li>BatchNorm and Droput were used as to combat overfitting, as our model overfit on train very fast</li>
+                </ul>
             </p>
             <h3>Enhanced MLP Regressor Architecture</h3>
             <p>
