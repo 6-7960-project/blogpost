@@ -56,11 +56,13 @@
                 <h2>Introduction</h2>
                 <p>
                     The ability to count objects in images is a fundamental skill that humans acquire effortlessly. In computer vision, counting objects remains a challenging problem, especially when the categories and scenes vary significantly. 
-                    Traditional supervised methods often rely on large, annotated datasets and carefully tuned architectures to perform counting tasks. With the advent of large-scale vision-language models like CLIP, which aligns images and text in a shared embedding space, a new paradigm emerges: leveraging powerful pre-trained features to tackle tasks such as counting in a zero-shot or few-shot manner.
+                    Traditional supervised methods often rely on carefully tuned architectures to perform counting tasks. With the advent of large-scale vision-language models like CLIP <sup><a href="#ref-clip">[1]</a></sup>, which aligns images and text in a shared embedding space, a new paradigm emerges: 
+                    leveraging powerful pre-trained features to tackle tasks such as counting in a zero-shot or few-shot manner.
                 </p>
                 <h3>What is CLIP?</h3>
                 <p>
-                    CLIP (Contrastive Language-Image Pre-training) is a model that learns to match images with their corresponding textual descriptions. The core idea is to train a vision encoder and a text encoder jointly using a large dataset of (image, text) pairs. The training objective is contrastive: the correct (image, text) pairs are brought closer together in the embedding space, while incorrect pairings are pushed apart. After training, CLIP can:
+                    CLIP (Contrastive Language-Image Pre-training) is a model that learns to match images with their corresponding textual descriptions. The core idea is to train a vision encoder and a text encoder jointly using a large dataset of (image, text) pairs. 
+                    The training objective is contrastive: the correct (image, text) pairs are brought closer together in the embedding space, while incorrect pairings are pushed apart. After training, CLIP can:
                 </p>
                 <ul>
                     <li>Provide semantic embeddings for images and text that reflect their high-level concepts.</li>
@@ -68,14 +70,18 @@
                     <li>Facilitate retrieval tasks, where given a text query one can find the most semantically relevant images and vice versa.</li>
                 </ul>
                 <p>
-                    Because CLIP is trained on a broad array of image-text pairs scraped from the internet, it acquires a wide-ranging understanding of visual concepts and language constructs, making it adaptable to diverse tasks, many of which it had never been explicitly trained on.
+                    Because CLIP is trained on a broad array of image-text pairs scraped from the internet, it acquires a wide-ranging understanding of visual concepts and language constructs, making it adaptable to diverse tasks, 
+                    many of which it had never been explicitly trained on.
                 </p>
                 <h3>Motivation for Using CLIP in Counting</h3>
                 <p>
-                    Traditional approaches to counting often rely on generating heat maps or density estimates for a given class of objects. While these methods achieve remarkable performance, they can be complex and resource-intensive, requiring large amounts of annotated data and specialized architectures. Prior works have introduced sophisticated deep networks that directly infer counts from images, often using intermediate representations like heat maps or leveraging point-level annotations. These methods achieve state-of-the-art results but at the cost of increased complexity and potentially reduced generalizability.
+                    Traditional approaches to counting often rely on generating heat maps or density estimates for a given class of objects. While these methods achieve remarkable performance, they can be complex and resource-intensive, 
+                    requiring large amounts of annotated data and specialized architectures. Prior works have introduced sophisticated deep networks that directly infer counts from images, 
+                    often using intermediate representations like heat maps or leveraging point-level annotations. These methods achieve state-of-the-art results but at the cost of increased complexity.
                 </p>
                 <p>
-                    Vision-language models like CLIP offer a promising alternative by leveraging their rich joint embeddings to perform counting in a simpler and more scalable manner. By training a regression head on top of CLIP's embeddings, we aim to imbue the model with numerical reasoning capabilities essential for accurate object counting, without the need for complex intermediate representations.
+                    Vision-language models like CLIP offer a promising alternative by leveraging their rich joint embeddings to perform counting in a simpler and more scalable manner. By training a regression head on top of CLIP's embeddings, 
+                    we aim to imbue the model with numerical reasoning capabilities essential for accurate object counting, without the need for complex intermediate representations.
                 </p>
             </div>
         </section>
@@ -84,13 +90,18 @@
         <section id="related_work">
             <h2>Related Work</h2>
             <p>
-                Large vision-language models (VLMs), such as CLIP, learn rich joint image-text representations, facilitating advances in numerous downstream tasks, including zero-shot classification and text-to-image generation. Nevertheless, existing VLMs exhibit a prominent well-documented limitation – they fail to encapsulate compositional concepts such as counting.
+                Large vision-language models (VLMs), such as CLIP, learn rich joint image-text representations, facilitating advances in numerous downstream tasks, including zero-shot classification and text-to-image generation. 
+                Nevertheless, existing VLMs exhibit a prominent well-documented limitation – they fail to encapsulate compositional concepts such as counting. Despite this, many other papers managed to improve CLIP's (or some other VLM's) counting capabilities, 
+                however, all of the existing literature differs from our approach. We approach this problem as a regression task, and thus make our pipeline simpler, while still maintaing better accuracy over zero-shot.
             </p>
             <p>
-                <strong>Teaching CLIP to Count to Ten</strong> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. They propose a counting-contrastive loss to finetune a pre-trained VLM, enabling it to distinguish between correct and counterfactual object counts in image-text pairs. Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
+                <strong>Teaching CLIP to Count to Ten</strong> by Roni Paiss et al. explores this limitation by introducing a counting-aware CLIP model. 
+                They propose a counting-contrastive loss to finetune a pre-trained VLM, enabling it to distinguish between correct and counterfactual object counts in image-text pairs. 
+                Their work demonstrates significant improvements over original CLIP in object counting tasks while maintaining performance on general benchmarks.
             </p>
             <p>
-                <strong>Contrastive Vision-Language Models:</strong> Vision-language models have demonstrated impressive success in vision and multimodal tasks. Models like CLIP and BASIC are trained with a contrastive objective, aligning matching text-image pairs closely while distancing non-matching pairs in the embedding space. However, these models struggle with tasks requiring precise numerical reasoning, such as counting.
+                <strong>Contrastive Vision-Language Models:</strong> Vision-language models have demonstrated impressive success in vision and multimodal tasks. Models like CLIP and BASIC are trained with a contrastive objective, 
+                aligning matching text-image pairs closely while distancing non-matching pairs in the embedding space. However, these models struggle with tasks requiring precise numerical reasoning, such as counting.
             </p>
             <p>
                 <strong>Subitizing in Computer Vision:</strong> Subitizing refers to the ability to instantly recognize the number of objects without counting. While humans can subitize up to a small number of objects (typically 4), VLMs like CLIP lack this capability, especially for larger numbers. Previous works have focused on limited object counts within subitizing ranges but have not addressed the broader counting problem.
@@ -263,7 +274,8 @@
         <section id="references">
             <h2>References</h2>
             <ol>
-                <li>Radford, A., et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).</li>
+                <li id="ref-clip">Radford, A., et al. "Learning Transferable Visual Models From Natural Language Supervision." ICML (2021).</li>
+                 <!-- Other references here -->
                 <li>Lin, T.-Y., et al. "Microsoft COCO: Common Objects in Context." ECCV (2014).</li>
                 <li>Paiss, R., Ephrat, A., Tov, O., Zada, S., Mosseri, I., Irani, M., & Dekel, T. "Teaching CLIP to Count to Ten." arXiv preprint arXiv:2302.12066 (2023).</li>
                 <li>He, K., Zhang, X., Ren, S., & Sun, J. "Deep Residual Learning for Image Recognition." CVPR (2016).</li>
