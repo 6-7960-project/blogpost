@@ -188,9 +188,9 @@
             <h2>Training and Evaluation Metrics</h2>
             <h3>RMSE, MAE, and MMAE Definitions</h3>
             <ul>
-                <li><strong>RMSE:</strong> Defined as <code>√(Σ(y_i - ŷ_i)^2 / N)</code>, where <code>y_i</code> is the ground-truth count and <code>ŷ_i</code> is the predicted count. RMSE heavily penalizes large errors and is sensitive to outliers. It is a common metric in regression tasks.</li>
-                <li><strong>MAE:</strong> Defined as <code>Σ|y_i - ŷ_i| / N</code>, MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
-                <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by <code>MMAE = Σ(|y_i - ŷ_i| / (y_i + 1)) / N</code>. MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
+                <li><strong>RMSE:</strong> Defined as \( \sqrt{\frac{\sum_{i=1}^{N} (y_i - \hat{y}_i)^2}{N}} \), where \( y_i \) is the ground-truth count and \( \hat{y}_i \) is the predicted count. RMSE heavily penalizes large errors and is sensitive to outliers. It is a common metric in regression tasks.</li>
+                <li><strong>MAE:</strong> Defined as \( \frac{\sum_{i=1}^{N} |y_i - \hat{y}_i|}{N} \), MAE measures the average absolute difference between predicted and actual values. It provides a more direct interpretation of the average magnitude of errors.</li>
+                <li><strong>MMAE (Modified MAE):</strong> We propose a modified MAE given by \( \text{MMAE} = \frac{\sum_{i=1}^{N} \frac{|y_i - \hat{y}_i|}{y_i + 1}}{N} \). MMAE weights the error by the scale of the count, penalizing off-by-one errors more heavily for smaller counts.</li>
             </ul>
             <h3>Why Train on MMAE?</h3>
             <p>
