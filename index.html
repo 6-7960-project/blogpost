@@ -163,33 +163,7 @@
                     <li>BatchNorm and Droput were used as to combat overfitting, as our model overfit on train very fast.</li>
                 </ul>
             </p>
-            <div class="mermaid">
-                graph TD
-            
-                    X[Input (x, dimension: input_dim)] --> FC1[Linear(input_dim -> 2048)]
-                    FC1 --> BN1[BatchNorm(2048)]
-                    BN1 --> ReLU1[ReLU]
-                    ReLU1 --> D1[Dropout(0.3)]
-                    D1 --> FC2[Linear(2048 -> 2048)]
-                    FC2 --> BN2[BatchNorm(2048)]
-                    BN2 --> ReLU2[ReLU]
-                    ReLU2 --> D2[Dropout(0.3)]
-                    
-                    X --> Skip[Skip: Linear(input_dim -> 2048)]
-                    D2 -->|Add residual|Add[Add Residual with Skip]
-                    Skip --> Add
-            
-                    Add --> FC3[Linear(2048 -> 1024)]
-                    FC3 --> BN3[BatchNorm(1024)]
-                    BN3 --> ReLU3[ReLU]
-                    ReLU3 --> D3[Dropout(0.3)]
-                    D3 --> FC4[Linear(1024 -> 512)]
-                    FC4 --> BN4[BatchNorm(512)]
-                    BN4 --> ReLU4[ReLU]
-                    ReLU4 --> D4[Dropout(0.3)]
-                    D4 --> FC5[Linear(512 -> 1)]
-                    FC5 --> Output[Output]
-            </div>
+           
 
 
 
